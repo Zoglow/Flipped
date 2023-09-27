@@ -22,80 +22,36 @@ struct TimelineView: View {
             RoundedRectangle(cornerRadius: 50) //timeline bg
                 .frame(width:700, height: 50)
                 .foregroundColor(.black.opacity(0.25))
-            
-            ScrollView(.horizontal) {
-                HStack(alignment: .center) { //Frames
-                    
-                    ForEach(animation.frames) { frame in
+            ScrollViewReader { value in
+                
+                ScrollView(.horizontal) {
+                    HStack(alignment: .center) { //Frames
                         
-                        if (frame == animation.selectedFrame) {
-                            HStack {
-                                Button {
-                                    try? realm.write {
-                                        let thisAnimation = animation.thaw()
-                                        let newFrame = Frame()
-                                        let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
-                                        
-                                        
-                                        thisAnimation?.selectedFrame = newFrame
-                                        thisAnimation?.frames.insert(newFrame, at: index!)
-
-                                    }
-                                } label: {
-                                    ZStack {
-                                        Rectangle()
-                                            .frame(width: 37, height: 45)
-                                            .foregroundColor(.white)
-                                            .shadow(radius: 5)
-                                        Image(systemName: "plus")
-                                            .foregroundColor(.black)
-                                            .font(.headline)
-                                    }
-                                }
-
-                                TimelineFrame(thisFrame: frame, animation: animation)
-                                    .zIndex(3)
-                                
-                                Button {
-                                    try? realm.write {
-                                        let thisAnimation = animation.thaw()
-                                        let newFrame = Frame()
-                                        let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
-                                        
-                                        
-                                        thisAnimation?.selectedFrame = newFrame
-                                        thisAnimation?.frames.insert(newFrame, at: index! + 1)
-
-                                    }
-                                } label: {
-                                    ZStack {
-                                        Rectangle()
-                                            .frame(width: 37, height: 45)
-                                            .foregroundColor(.white)
-                                            .shadow(radius: 5)
-                                        Image(systemName: "plus")
-                                            .foregroundColor(.black)
-                                            .font(.headline)
-                                    }
-                                }
-                            }
-                            .padding(.horizontal, -33)
-                            .zIndex(3)
+                        ForEach(animation.frames) { frame in
                             
-                        } else {
-                            TimelineFrame(thisFrame: frame, animation: animation)
+                            if (frame == animation.selectedFrame) {
+                                HStack {
+                                    addFrameButton(isToLeft: true)
+
+                                    TimelineFrame(thisFrame: frame, animation: animation)
+                                        .zIndex(3)
+                                    
+                                    addFrameButton(isToLeft: false)
+                                }
+                                .padding(.horizontal, -33)
+                                .zIndex(3)
+                                
+                            } else {
+                                TimelineFrame(thisFrame: frame, animation: animation)
+                            }
                         }
-                        
-                        
                     }
+                    .padding(10)
+                    .padding(.horizontal, 40)
                     
                 }
-                .padding(10)
-                .padding(.horizontal, 40)
                 
-            }
-            .frame(width: 550)
-            
+            }.frame(width: 550)
             
             HStack(alignment: .center) { //timeline controls
                 Button {
@@ -122,7 +78,34 @@ struct TimelineView: View {
         }.frame(width:700)
         
     }
+    
+    func addFrameButton(isToLeft: Bool) -> some View {
+        return AnyView (
+            Button {
+                try? realm.write {
+                    let thisAnimation = animation.thaw()
+                    let newFrame = Frame()
+                    let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
+                    
+                    thisAnimation?.selectedFrame = newFrame
+                    thisAnimation?.frames.insert(newFrame, at: isToLeft ? index! : index! + 1)
+                }
+            } label: {
+                ZStack {
+                    Rectangle()
+                        .frame(width: 37, height: 45)
+                        .foregroundColor(.white)
+                        .shadow(radius: 5)
+                    Image(systemName: "plus")
+                        .foregroundColor(.black)
+                        .font(.headline)
+                }
+            }
+        )
+    }
 }
+
+
 
 //struct TimelineView_Previews: PreviewProvider {
 //    static var previews: some View {
