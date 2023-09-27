@@ -27,7 +27,66 @@ struct TimelineView: View {
                 HStack(alignment: .center) { //Frames
                     
                     ForEach(animation.frames) { frame in
-                        TimelineFrame(thisFrame: frame, animation: animation)
+                        
+                        if (frame == animation.selectedFrame) {
+                            HStack {
+                                Button {
+                                    try? realm.write {
+                                        let thisAnimation = animation.thaw()
+                                        let newFrame = Frame()
+                                        let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
+                                        
+                                        
+                                        thisAnimation?.selectedFrame = newFrame
+                                        thisAnimation?.frames.insert(newFrame, at: index!)
+
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: 37, height: 45)
+                                            .foregroundColor(.white)
+                                            .shadow(radius: 5)
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                    }
+                                }
+
+                                TimelineFrame(thisFrame: frame, animation: animation)
+                                    .zIndex(3)
+                                
+                                Button {
+                                    try? realm.write {
+                                        let thisAnimation = animation.thaw()
+                                        let newFrame = Frame()
+                                        let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
+                                        
+                                        
+                                        thisAnimation?.selectedFrame = newFrame
+                                        thisAnimation?.frames.insert(newFrame, at: index! + 1)
+
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Rectangle()
+                                            .frame(width: 37, height: 45)
+                                            .foregroundColor(.white)
+                                            .shadow(radius: 5)
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, -33)
+                            .zIndex(3)
+                            
+                        } else {
+                            TimelineFrame(thisFrame: frame, animation: animation)
+                        }
+                        
+                        
                     }
                     
                 }
@@ -36,10 +95,6 @@ struct TimelineView: View {
                 
             }
             .frame(width: 550)
-            
-            
-                
-            
             
             
             HStack(alignment: .center) { //timeline controls
@@ -55,16 +110,7 @@ struct TimelineView: View {
                         Image(systemName: "play.fill")
                     }
                 }
-                
-                Button { //this button
-                    try? realm.write {
-                        let thisAnimation = animation.thaw()
-                        thisAnimation?.selectedFrame = Frame()
-                        thisAnimation?.frames.append(thisAnimation!.selectedFrame!)
-                    }
-                } label: {
-                    Image(systemName: "plus")
-                }
+            
                 Spacer()
                 Image(systemName: "gear")
             }
@@ -80,6 +126,13 @@ struct TimelineView: View {
 
 //struct TimelineView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        TimelineView(animation: Animation())
+//
+//        var conf = Realm.Configuration.defaultConfiguration
+//        conf.inMemoryIdentifier = "preview"
+//        let realm = try! Realm(configuration: conf)
+//
+//
+//        return TimelineView(animation: Animation())
+//            .environment(\.realm, realm)
 //    }
 //}

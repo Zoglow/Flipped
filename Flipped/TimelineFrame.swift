@@ -24,12 +24,15 @@ struct TimelineFrame: View {
                 thisAnimation?.selectedFrame = thisFrame
             }
         } label: {
+            
             Rectangle()
                 .frame(width: 125, height: 100)
                 .foregroundColor(.white)
                 .shadow(radius: 5)
                 .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
-                .padding(thisFrame == animation.selectedFrame ? 20 : 0)
+                .padding(.vertical, thisFrame == animation.selectedFrame ? 10 : 0)
+                .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
+                
         }
 
         
