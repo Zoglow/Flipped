@@ -31,6 +31,8 @@ struct CanvasView: UIViewRepresentable {
         
     }
     
+    
+    // Never gets called
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
         // Ensure there's a selected frame
         guard let selectedFrame = selectedFrame.thaw() else {

@@ -14,44 +14,44 @@ struct TimelineView: View {
     @Environment(\.realmConfiguration) var conf
 
     @State private var isPlaying = false;
-    @ObservedRealmObject var animation: Animation
     
+    @ObservedRealmObject var animation: Animation
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 50) //timeline bg
                 .frame(width:700, height: 50)
                 .foregroundColor(.black.opacity(0.25))
-            ScrollViewReader { value in
+            
                 
-                ScrollView(.horizontal) {
-                    HStack(alignment: .center) { //Frames
+            ScrollView(.horizontal) {
+                HStack(alignment: .center) { //Frames
+                    
+                    ForEach(animation.frames) { frame in
                         
-                        ForEach(animation.frames) { frame in
-                            
-                            if (frame == animation.selectedFrame) {
-                                HStack {
-                                    addFrameButton(isToLeft: true)
+                        if (frame == animation.selectedFrame) {
+                            HStack {
+                                addFrameButton(isToLeft: true)
 
-                                    TimelineFrame(thisFrame: frame, animation: animation)
-                                        .zIndex(3)
-                                    
-                                    addFrameButton(isToLeft: false)
-                                }
-                                .padding(.horizontal, -33)
-                                .zIndex(3)
-                                
-                            } else {
                                 TimelineFrame(thisFrame: frame, animation: animation)
+                                    .zIndex(3)
+                                
+                                addFrameButton(isToLeft: false)
                             }
+                            .id(frame.id)
+                            .padding(.horizontal, -33)
+                            .zIndex(3)
+                            
+                        } else {
+                            TimelineFrame(thisFrame: frame, animation: animation)
                         }
                     }
-                    .padding(10)
-                    .padding(.horizontal, 40)
-                    
                 }
+                .padding(10)
+                .padding(.horizontal, 40)
                 
-            }.frame(width: 550)
+            }
+            .frame(width: 550)
             
             HStack(alignment: .center) { //timeline controls
                 Button {
@@ -106,16 +106,3 @@ struct TimelineView: View {
 }
 
 
-
-//struct TimelineView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        var conf = Realm.Configuration.defaultConfiguration
-//        conf.inMemoryIdentifier = "preview"
-//        let realm = try! Realm(configuration: conf)
-//
-//
-//        return TimelineView(animation: Animation())
-//            .environment(\.realm, realm)
-//    }
-//}

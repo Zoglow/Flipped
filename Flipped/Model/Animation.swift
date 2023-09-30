@@ -19,3 +19,5 @@ final class Animation: Object, ObjectKeyIdentifiable {
     @Persisted var selectedFrame: Frame?
     
 }
+
+
