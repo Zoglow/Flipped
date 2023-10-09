@@ -28,14 +28,23 @@ struct AnimationView: View {
     var body: some View {
             
         ZStack(alignment: .center) {
-            Color.gray
+            Color.white
                 .ignoresSafeArea()
             
-            CanvasView(canvas: $canvas, drawing: $drawing, selectedFrame: animation.selectedFrame!)
+            OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!)
+                .opacity(0.3)
+                .ignoresSafeArea()
+            
+            Rectangle()
+                .foregroundColor(.blue)
+                .blendMode(.screen)
+                .ignoresSafeArea()
+            
+            CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
                 .onAppear(perform: { loadDrawing() })
                 .onDisappear(perform: { saveDrawing() })
                 .ignoresSafeArea()
-                .shadow(radius: 5)
+            
             
             if (!isFocused) {
                 VStack {
@@ -61,7 +70,6 @@ struct AnimationView: View {
                     HStack {
                         TextField(animation.title, text: $editableTitle).textFieldStyle(.roundedBorder)
                         Button {
-                            
                             if (!editableTitle.isEmpty) {
                                 
                                 try? realm.write {
@@ -70,7 +78,6 @@ struct AnimationView: View {
                                 }
                                 
                             }
-                            
                             isEditingTitle.toggle()
                             print(isEditingTitle)
                         } label: {

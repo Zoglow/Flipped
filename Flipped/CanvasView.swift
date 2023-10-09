@@ -17,11 +17,14 @@ struct CanvasView: UIViewRepresentable {
     @Binding var canvas: PKCanvasView
     @Binding var drawing: PKDrawing
     
+    @ObservedRealmObject var animation: Animation
     @ObservedRealmObject var selectedFrame: Frame
     
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = PKInkingTool(.pen, color: .black, width: 15)
+        canvas.isOpaque = false
+        
         canvas.drawing = drawing
         
         return canvas

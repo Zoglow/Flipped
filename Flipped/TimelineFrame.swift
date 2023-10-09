@@ -40,8 +40,7 @@ struct TimelineFrame: View {
                 .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
                 .padding(.vertical, thisFrame == animation.selectedFrame ? 10 : 0)
                 .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
-                
-                
+
         }
 
         

@@ -60,13 +60,24 @@ struct TimelineView: View {
                     isPlaying.toggle()
                     
                     // Play/pause animation:
+//                    while (isPlaying) {
+//                        try! realm.write {
+//                            let thisAnimaton = animation.thaw()
+//                            thisAnimaton!.selectedFrame = thisAnimaton!.frames[0]
+//                        }
+                        
+//                        ForEach(animation.frames) { frame in
+//
+//                                animation.selectedFrame = frame
+//                            }
+//
+//                        }
+//                    }
+                    
                     
                 } label: {
-                    if (isPlaying) {
-                        Image(systemName: "pause.fill")
-                    } else {
-                        Image(systemName: "play.fill")
-                    }
+                    
+                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                 }
             
                 Spacer()
