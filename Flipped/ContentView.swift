@@ -54,7 +54,7 @@ struct ContentView: View {
             .navigationTitle("Gallery")
             .navigationBarTitleDisplayMode(.inline)
             .padding(20)
-        }
+        }.background(.white)
     }
     
     private func addItem() {

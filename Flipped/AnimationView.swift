@@ -15,7 +15,9 @@ struct AnimationView: View {
     @Environment(\.realmConfiguration) var conf
     
     @ObservedRealmObject var animation: Animation
-    @State var canvas: PKCanvasView = PKCanvasView()
+    
+    @State var canvas = PKCanvasView()
+    @State var drawing = PKDrawing()
     
     @State private var isFocused = false
     @State private var isEditingTitle = false
@@ -28,7 +30,7 @@ struct AnimationView: View {
             Color.gray
                 .ignoresSafeArea()
             
-            CanvasView(canvas: $canvas, selectedFrame: animation.selectedFrame!)
+            CanvasView(canvas: $canvas, drawing: $drawing, selectedFrame: animation.selectedFrame!)
                 .ignoresSafeArea()
                 .shadow(radius: 5)
             
@@ -36,7 +38,7 @@ struct AnimationView: View {
                 VStack {
                     
                     Spacer()
-                    TimelineView(animation: animation)
+                    TimelineView(canvas: $canvas, animation: animation)
                     
                 }
                 HStack {
@@ -48,6 +50,7 @@ struct AnimationView: View {
             }
             
         }
+        .onAppear(perform: { loadDrawing() })
         .toolbar {
             
             ToolbarItem(placement: .principal) {
@@ -92,7 +95,35 @@ struct AnimationView: View {
                 } label: {
                     Image(systemName: "rectangle.expand.vertical")
                 }
+                
+                
 
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    saveDrawing()
+                } label: {
+                    Image(systemName: "square.and.arrow.down")
+                }
+            }
+        }
+    }
+    
+    func saveDrawing() {
+        let thisAnimation = animation.thaw()
+        try! realm.write {
+            thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
+            print("Frame data saved: " + (thisAnimation?.selectedFrame?.frameData.debugDescription ?? "No data found"))
+        }
+        loadDrawing()
+        
+    }
+    
+    func loadDrawing() {
+        if let savedData = animation.selectedFrame?.frameData {
+            if let loadedDrawing = try? PKDrawing(data: savedData) {
+                drawing = loadedDrawing
             }
         }
     }

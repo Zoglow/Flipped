@@ -15,19 +15,29 @@ struct CanvasView: UIViewRepresentable {
     @Environment(\.realmConfiguration) var conf
     
     @Binding var canvas: PKCanvasView
+    @Binding var drawing: PKDrawing
+    
     @ObservedRealmObject var selectedFrame: Frame
     
     func makeUIView(context: Context) -> PKCanvasView {
         canvas.drawingPolicy = .anyInput
         canvas.tool = PKInkingTool(.pen, color: .black, width: 15)
-        
-        do { canvas.drawing = try PKDrawing(data: selectedFrame.frameData) }
-        catch { print("Error retrieving drawing data") }
+        canvas.drawing = drawing
         
         return canvas
+        
+        
+        //        canvas.delegate = self
+                
+        //        do { canvas.drawing = try PKDrawing(data: selectedFrame.frameData) }
+        //        catch { print("Error retrieving drawing data") }
     }
 
     func updateUIView(_ canvasView: PKCanvasView, context: Context) {
+    
+        if let loadedDrawing = try? PKDrawing(data: selectedFrame.frameData) {
+            drawing = loadedDrawing
+        }
         
     }
     

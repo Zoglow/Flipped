@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PencilKit
 import RealmSwift
 
 struct TimelineView: View {
@@ -14,6 +15,7 @@ struct TimelineView: View {
     @Environment(\.realmConfiguration) var conf
 
     @State private var isPlaying = false;
+    @Binding var canvas: PKCanvasView
     
     @ObservedRealmObject var animation: Animation
     
@@ -33,7 +35,7 @@ struct TimelineView: View {
                             HStack {
                                 addFrameButton(isToLeft: true)
 
-                                TimelineFrame(thisFrame: frame, animation: animation)
+                                TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                                     .zIndex(3)
                                 
                                 addFrameButton(isToLeft: false)
@@ -43,7 +45,7 @@ struct TimelineView: View {
                             .zIndex(3)
                             
                         } else {
-                            TimelineFrame(thisFrame: frame, animation: animation)
+                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                         }
                     }
                 }
@@ -84,11 +86,17 @@ struct TimelineView: View {
             Button {
                 try? realm.write {
                     let thisAnimation = animation.thaw()
+                    
+                    thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
+                    
                     let newFrame = Frame()
                     let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
                     
                     thisAnimation?.selectedFrame = newFrame
                     thisAnimation?.frames.insert(newFrame, at: isToLeft ? index! : index! + 1)
+                    
+                    canvas.drawing = PKDrawing()
+                    canvas.drawing = try PKDrawing(data: thisAnimation?.selectedFrame?.frameData ?? Data())
                 }
             } label: {
                 ZStack {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PencilKit
 import RealmSwift
 
 struct TimelineFrame: View {
@@ -16,12 +17,15 @@ struct TimelineFrame: View {
     @ObservedRealmObject var thisFrame: Frame
     @ObservedRealmObject var animation: Animation
     
+    @Binding var canvas: PKCanvasView
+    
     var body: some View {
         Button {
             try? realm.write {
                 let thisAnimation = animation.thaw()
                 let thisFrame = thisFrame.thaw()
                 thisAnimation?.selectedFrame = thisFrame
+                canvas.drawing = try PKDrawing(data: thisAnimation?.selectedFrame?.frameData ?? Data())
             }
         } label: {
             
@@ -39,8 +43,8 @@ struct TimelineFrame: View {
     }
 }
 
-struct TimelineFrame_Previews: PreviewProvider {
-    static var previews: some View {
-        TimelineFrame(thisFrame: Frame(), animation: Animation())
-    }
-}
+//struct TimelineFrame_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TimelineFrame(thisFrame: Frame(), animation: Animation())
+//    }
+//}
