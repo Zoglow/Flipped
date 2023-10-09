@@ -20,6 +20,7 @@
 		B00A46A62AC2039D00CF1B94 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A46A52AC2039D00CF1B94 /* TimelineView.swift */; };
 		B00A46A82AC26AF200CF1B94 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A46A72AC26AF200CF1B94 /* CanvasView.swift */; };
 		B00A46AA2AC3094600CF1B94 /* TimelineFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */; };
+		B073535C2AD37F20008B7645 /* AnimationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B073535B2AD37F20008B7645 /* AnimationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		B00A46A52AC2039D00CF1B94 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		B00A46A72AC26AF200CF1B94 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineFrame.swift; sourceTree = "<group>"; };
+		B073535B2AD37F20008B7645 /* AnimationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,7 @@
 		B00A46882AC1FD1400CF1B94 /* Flipped */ = {
 			isa = PBXGroup;
 			children = (
-				B00A469C2AC1FF2400CF1B94 /* Model */,
+				B073535A2AD37F02008B7645 /* Model */,
 				B00A46892AC1FD1400CF1B94 /* FlippedApp.swift */,
 				B00A468B2AC1FD1400CF1B94 /* ContentView.swift */,
 				B00A46A12AC2026300CF1B94 /* AnimationView.swift */,
@@ -91,11 +93,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		B00A469C2AC1FF2400CF1B94 /* Model */ = {
+		B00A469C2AC1FF2400CF1B94 /* Realm Objects */ = {
 			isa = PBXGroup;
 			children = (
 				B00A469D2AC1FF3900CF1B94 /* Animation.swift */,
 				B00A469F2AC1FF4300CF1B94 /* Frame.swift */,
+			);
+			path = "Realm Objects";
+			sourceTree = "<group>";
+		};
+		B073535A2AD37F02008B7645 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B00A469C2AC1FF2400CF1B94 /* Realm Objects */,
+				B073535B2AD37F20008B7645 /* AnimationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +192,7 @@
 				B00A46AA2AC3094600CF1B94 /* TimelineFrame.swift in Sources */,
 				B00A46A62AC2039D00CF1B94 /* TimelineView.swift in Sources */,
 				B00A46A82AC26AF200CF1B94 /* CanvasView.swift in Sources */,
+				B073535C2AD37F20008B7645 /* AnimationModel.swift in Sources */,
 				B00A46A22AC2026400CF1B94 /* AnimationView.swift in Sources */,
 				B00A46A42AC202F000CF1B94 /* ToolbarView.swift in Sources */,
 				B00A46A02AC1FF4300CF1B94 /* Frame.swift in Sources */,

@@ -26,18 +26,13 @@ struct CanvasView: UIViewRepresentable {
         
         return canvas
         
-        
-        //        canvas.delegate = self
-                
-        //        do { canvas.drawing = try PKDrawing(data: selectedFrame.frameData) }
-        //        catch { print("Error retrieving drawing data") }
     }
 
     func updateUIView(_ canvasView: PKCanvasView, context: Context) {
     
-        if let loadedDrawing = try? PKDrawing(data: selectedFrame.frameData) {
-            drawing = loadedDrawing
-        }
+//        if let loadedDrawing = try? PKDrawing(data: selectedFrame.frameData) {
+//            drawing = loadedDrawing
+//        }
         
     }
     

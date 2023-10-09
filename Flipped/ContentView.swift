@@ -27,9 +27,9 @@ struct ContentView: View {
                     ForEach(animations) { animation in
                         NavigationLink(destination: AnimationView(animation: animation)) {
                             VStack {
-                                Image(systemName: "")
+                                Rectangle()
                                     .frame(width: 170, height: 150)
-                                    .background(.white)
+                                    .foregroundColor(.white)
                                     .cornerRadius(3)
                                     .shadow(radius: 5)
                                 Text(animation.title).foregroundColor(.black)

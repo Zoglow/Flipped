@@ -18,6 +18,11 @@ final class Animation: Object, ObjectKeyIdentifiable {
     @Persisted var frames = RealmSwift.List<Frame>()
     @Persisted var selectedFrame: Frame?
     
+//    func saveFrameData(data: Data) {
+//        
+//    }
+    
+    
 }
 
 

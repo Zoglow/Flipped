@@ -18,6 +18,7 @@ struct AnimationView: View {
     
     @State var canvas = PKCanvasView()
     @State var drawing = PKDrawing()
+    @State var scaleEffect = 0.75
     
     @State private var isFocused = false
     @State private var isEditingTitle = false
@@ -31,6 +32,8 @@ struct AnimationView: View {
                 .ignoresSafeArea()
             
             CanvasView(canvas: $canvas, drawing: $drawing, selectedFrame: animation.selectedFrame!)
+                .onAppear(perform: { loadDrawing() })
+                .onDisappear(perform: { saveDrawing() })
                 .ignoresSafeArea()
                 .shadow(radius: 5)
             
@@ -38,11 +41,11 @@ struct AnimationView: View {
                 VStack {
                     
                     Spacer()
-                    TimelineView(canvas: $canvas, animation: animation)
+                    TimelineView(canvas: $canvas, animation: animation).scaleEffect(scaleEffect)
                     
                 }
                 HStack {
-                    ToolbarView(canvas: $canvas)
+                    ToolbarView(canvas: $canvas).scaleEffect(scaleEffect)
                         .offset(x:-95)
                     Spacer()
                 }
@@ -50,7 +53,6 @@ struct AnimationView: View {
             }
             
         }
-        .onAppear(perform: { loadDrawing() })
         .toolbar {
             
             ToolbarItem(placement: .principal) {
@@ -107,8 +109,15 @@ struct AnimationView: View {
                     Image(systemName: "square.and.arrow.down")
                 }
             }
-        }
-    }
+        }.gesture(
+            MagnificationGesture()
+                .onEnded({ fingerDistance in
+                    isFocused = (fingerDistance > 1 ? true : false)
+                })
+        )
+        
+    } // End of View
+        
     
     func saveDrawing() {
         let thisAnimation = animation.thaw()
@@ -121,9 +130,14 @@ struct AnimationView: View {
     }
     
     func loadDrawing() {
+        
+        print("loadDrawing() called")
+        
         if let savedData = animation.selectedFrame?.frameData {
+            print("Frame data loaded: " + savedData.debugDescription)
             if let loadedDrawing = try? PKDrawing(data: savedData) {
                 drawing = loadedDrawing
+                canvas.drawing = drawing
             }
         }
     }

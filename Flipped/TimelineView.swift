@@ -84,6 +84,7 @@ struct TimelineView: View {
     func addFrameButton(isToLeft: Bool) -> some View {
         return AnyView (
             Button {
+                
                 try? realm.write {
                     let thisAnimation = animation.thaw()
                     
