@@ -77,9 +77,9 @@
 				B00A46A12AC2026300CF1B94 /* AnimationView.swift */,
 				B00A46A52AC2039D00CF1B94 /* TimelineView.swift */,
 				B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */,
+				B00A46A32AC202F000CF1B94 /* ToolbarView.swift */,
 				B00A46A72AC26AF200CF1B94 /* CanvasView.swift */,
 				B07353612AD48D1A008B7645 /* OnionSkinView.swift */,
-				B00A46A32AC202F000CF1B94 /* ToolbarView.swift */,
 				B00A468D2AC1FD1600CF1B94 /* Assets.xcassets */,
 				B00A468F2AC1FD1600CF1B94 /* Preview Content */,
 			);

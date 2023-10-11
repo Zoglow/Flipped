@@ -15,6 +15,8 @@ struct TimelineView: View {
     @Environment(\.realmConfiguration) var conf
 
     @State private var isPlaying = false;
+    @State private var timer: Timer?
+    
     @Binding var canvas: PKCanvasView
     
     @ObservedRealmObject var animation: Animation
@@ -57,27 +59,27 @@ struct TimelineView: View {
             
             HStack(alignment: .center) { //timeline controls
                 Button {
+                    
                     isPlaying.toggle()
                     
-                    // Play/pause animation:
-//                    while (isPlaying) {
-//                        try! realm.write {
-//                            let thisAnimaton = animation.thaw()
-//                            thisAnimaton!.selectedFrame = thisAnimaton!.frames[0]
+                    if isPlaying {
+                        
+                        //Save drawing to realm
+//                        try? realm.write {
+//                            let thisAnimation = animation.thaw()
+//                            thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
 //                        }
                         
-//                        ForEach(animation.frames) { frame in
-//
-//                                animation.selectedFrame = frame
-//                            }
-//
-//                        }
-//                    }
-                    
+                        startPlayback()
+                    } else {
+                        stopPlayback()
+                    }
                     
                 } label: {
                     
                     Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                }.onDisappear {
+                    isPlaying = false
                 }
             
                 Spacer()
@@ -90,6 +92,39 @@ struct TimelineView: View {
             
         }.frame(width:700)
         
+    }
+    
+    func startPlayback() {
+        guard !animation.frames.isEmpty else { return }
+        
+        let index = animation.frames.firstIndex(of: animation.selectedFrame!)
+
+        playFrame(index: index!)
+    }
+    
+    func playFrame(index: Int) {
+        guard isPlaying else { return }
+        
+        let nextIndex = (index + 1) % animation.frames.count
+
+        withAnimation {
+            try! realm.write {
+                let thisAnimation = animation.thaw()
+                
+                thisAnimation!.selectedFrame = thisAnimation?.frames[nextIndex]
+                canvas.drawing = try PKDrawing(data: thisAnimation!.selectedFrame!.frameData)
+                
+            }
+        }
+
+        // Delay between frames (adjust as needed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            playFrame(index: nextIndex)
+        }
+    }
+
+    func stopPlayback() {
+        isPlaying = false
     }
     
     func addFrameButton(isToLeft: Bool) -> some View {

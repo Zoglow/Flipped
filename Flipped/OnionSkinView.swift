@@ -19,22 +19,24 @@ struct OnionSkinView: UIViewRepresentable {
     @ObservedRealmObject var animation: Animation
     @ObservedRealmObject var selectedFrame: Frame
     
+    @State var indexModifier: Int
+    
     func makeUIView(context: Context) -> PKCanvasView {
-        canvas.drawingPolicy = .anyInput
-        canvas.tool = PKInkingTool(.pen, color: .black, width: 15)
-        canvas.isOpaque = false
         
+        canvas.isOpaque = false
         
         let selectedFrameIndex = animation.frames.firstIndex(of: animation.selectedFrame!)
         print("Selected frame index: " + selectedFrameIndex!.description)
         
-        if (selectedFrameIndex! > 0) {
-            let onionSkinIndex = selectedFrameIndex! - 1
+        let onionSkinIndex = selectedFrameIndex! + indexModifier
+        
+        if (onionSkinIndex >= 0 && onionSkinIndex < animation.frames.count) { // doesnt work
             canvas.drawing = try! PKDrawing(data: animation.frames[onionSkinIndex].frameData)
         } else {
             canvas.drawing = PKDrawing()
-            
+            print("Onion skin out of bounds")
         }
+        
         return canvas
     }
 
@@ -42,11 +44,13 @@ struct OnionSkinView: UIViewRepresentable {
         let selectedFrameIndex = animation.frames.firstIndex(of: animation.selectedFrame!)
         print("Selected frame index: " + selectedFrameIndex!.description)
         
-        if (selectedFrameIndex! > 0) {
-            let onionSkinIndex = selectedFrameIndex! - 1
+        let onionSkinIndex = selectedFrameIndex! + indexModifier
+        
+        if (onionSkinIndex >= 0 && onionSkinIndex < animation.frames.count) { // doesnt work
             canvas.drawing = try! PKDrawing(data: animation.frames[onionSkinIndex].frameData)
         } else {
             canvas.drawing = PKDrawing()
+            print("Onion skin out of bounds")
         }
     }
     

@@ -19,7 +19,7 @@ struct ToolbarView: View {
     @Binding var canvas: PKCanvasView
     @State private var selectedTool: DrawingTool? = .pencil  // Default to pencil
 
-    let pencil = PKInkingTool(.pencil, color: .black, width: 15)
+    let pencil = PKInkingTool(.pencil, color: .black, width: 10)
     let knife = PKLassoTool()
     let eraser = PKEraserTool(.vector)
 

@@ -19,6 +19,7 @@ struct AnimationView: View {
     @State var canvas = PKCanvasView()
     @State var drawing = PKDrawing()
     @State var scaleEffect = 0.75
+    @State var onionSkinModeIsOn = true
     
     @State private var isFocused = false
     @State private var isEditingTitle = false
@@ -31,14 +32,39 @@ struct AnimationView: View {
             Color.white
                 .ignoresSafeArea()
             
-            OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!)
-                .opacity(0.3)
-                .ignoresSafeArea()
-            
-            Rectangle()
-                .foregroundColor(.blue)
-                .blendMode(.screen)
-                .ignoresSafeArea()
+            if (onionSkinModeIsOn) {
+                
+                OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!, indexModifier: -2)
+                    .opacity(0.05)
+                    .ignoresSafeArea()
+                    .blendMode(.hardLight)// Added, not tested yet
+                
+                OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!, indexModifier: -1)
+                    .opacity(0.3)
+                    .ignoresSafeArea()
+                    .blendMode(.hardLight)
+                
+                Rectangle()
+                    .foregroundColor(.blue)
+                    .blendMode(.screen)
+                    .ignoresSafeArea()
+                
+                OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!, indexModifier: 2)
+                    .opacity(0.05)
+                    .ignoresSafeArea()
+                    .blendMode(.hardLight)
+                
+                OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!, indexModifier: 1)
+                    .opacity(0.3)
+                    .ignoresSafeArea()
+                    .blendMode(.hardLight)
+                
+                Rectangle()
+                    .foregroundColor(.red)
+                    .blendMode(.screen)
+                    .ignoresSafeArea()
+                
+            }
             
             CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
                 .onAppear(perform: { loadDrawing() })
