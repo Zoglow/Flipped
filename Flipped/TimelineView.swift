@@ -21,6 +21,7 @@ struct TimelineView: View {
     
     @ObservedRealmObject var animation: Animation
     
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 50) //timeline bg
@@ -61,22 +62,8 @@ struct TimelineView: View {
                 Button {
                     
                     isPlaying.toggle()
-                    
-                    if isPlaying {
-                        
-                        //Save drawing to realm
-//                        try? realm.write {
-//                            let thisAnimation = animation.thaw()
-//                            thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
-//                        }
-                        
-                        startPlayback()
-                    } else {
-                        stopPlayback()
-                    }
-                    
+                    isPlaying ? startPlayback() : stopPlayback()
                 } label: {
-                    
                     Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                 }.onDisappear {
                     isPlaying = false
@@ -96,9 +83,7 @@ struct TimelineView: View {
     
     func startPlayback() {
         guard !animation.frames.isEmpty else { return }
-        
         let index = animation.frames.firstIndex(of: animation.selectedFrame!)
-
         playFrame(index: index!)
     }
     
@@ -110,6 +95,7 @@ struct TimelineView: View {
         withAnimation {
             try! realm.write {
                 let thisAnimation = animation.thaw()
+                thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation() // This is not efficient -- should only save once when play button is pressed
                 
                 thisAnimation!.selectedFrame = thisAnimation?.frames[nextIndex]
                 canvas.drawing = try PKDrawing(data: thisAnimation!.selectedFrame!.frameData)
@@ -133,7 +119,6 @@ struct TimelineView: View {
                 
                 try? realm.write {
                     let thisAnimation = animation.thaw()
-                    
                     thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
                     
                     let newFrame = Frame()
