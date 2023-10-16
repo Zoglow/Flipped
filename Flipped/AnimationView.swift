@@ -19,7 +19,7 @@ struct AnimationView: View {
     @State var canvas = PKCanvasView()
     @State var drawing = PKDrawing()
     @State var scaleEffect = 0.75
-    @State var onionSkinModeIsOn = true
+    @State public var onionSkinModeIsOn = true
     
     @State private var isFocused = false
     @State private var isEditingTitle = false
@@ -60,7 +60,7 @@ struct AnimationView: View {
                     .blendMode(.hardLight)
                 
                 Rectangle()
-                    .foregroundColor(.red)
+                    .foregroundColor(.green)
                     .blendMode(.screen)
                     .ignoresSafeArea()
                 
@@ -130,16 +130,19 @@ struct AnimationView: View {
                 } label: {
                     Image(systemName: "rectangle.expand.vertical")
                 }
-                
-                
-
             }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     saveDrawing()
                 } label: {
                     Image(systemName: "square.and.arrow.down")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    onionSkinModeIsOn.toggle()
+                } label: {
+                    Image(systemName: "square.3.stack.3d.middle.fill")
                 }
             }
         }.gesture(
