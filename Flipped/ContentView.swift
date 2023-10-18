@@ -18,6 +18,7 @@ struct ContentView: View {
     @ObservedResults(Animation.self) var animations
     
     private let adaptiveColumns = [GridItem(.adaptive(minimum: 250))]
+    @State var editModeIsOn = false
     
     var body: some View {
         
@@ -27,11 +28,29 @@ struct ContentView: View {
                     ForEach(animations) { animation in
                         NavigationLink(destination: AnimationView(animation: animation)) {
                             VStack {
-                                Rectangle()
-                                    .frame(width: 170, height: 150)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(3)
-                                    .shadow(radius: 5)
+                                ZStack {
+                                    Rectangle()
+                                        .foregroundColor(.white)
+                                    if (editModeIsOn) {
+                                        ZStack {
+                                            Rectangle()
+                                                .foregroundColor(.black)
+                                                .opacity(0.1)
+                                                .onTapGesture {
+                                                    $animations.remove(animation)
+                                                }
+                                            Image(systemName: "x.circle.fill")
+                                                .foregroundColor(Color.pink)
+                                                .font(.title)
+                                        }.zIndex(2)
+                                    }
+                                    
+                                } // Preview plus edit overlay
+                                .frame(width: 170, height: 150)
+                                .cornerRadius(3)
+                                .shadow(radius: 5)
+                                
+                                
                                 Text(animation.title).foregroundColor(.black)
                             }.padding(5)
                         }
@@ -40,9 +59,15 @@ struct ContentView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                editModeIsOn.toggle()
+                            }
+                        }, label: {
+                            Text(editModeIsOn ? "Done" : "Edit")
+                        })
                     }
-                    ToolbarItem {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: addItem) {
                             Image(systemName: "plus")
                         }
@@ -67,6 +92,7 @@ struct ContentView: View {
         }
             
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -74,3 +100,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
