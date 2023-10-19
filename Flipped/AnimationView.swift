@@ -37,7 +37,7 @@ struct AnimationView: View {
                 OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!, indexModifier: -2)
                     .opacity(0.05)
                     .ignoresSafeArea()
-                    .blendMode(.hardLight)// Added, not tested yet
+                    .blendMode(.hardLight)
                 
                 OnionSkinView(animation: animation, selectedFrame: animation.selectedFrame!, indexModifier: -1)
                     .opacity(0.3)
@@ -180,6 +180,16 @@ struct AnimationView: View {
     
     
 }
+
+extension PKDrawing {
+    func generateThumbnail(scale: CGFloat) -> UIImage {
+        
+        let screen = UIScreen.main.bounds
+        
+        return self.image(from: CGRect(origin: .zero, size: CGSize(width: screen.width, height: screen.height)), scale: scale)
+    }
+}
+
 
 //struct AnimationView_Previews: PreviewProvider {
 //    static var previews: some View {

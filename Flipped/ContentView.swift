@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import PencilKit
 
 struct ContentView: View {
     
@@ -32,8 +33,12 @@ struct ContentView: View {
                         NavigationLink(destination: AnimationView(animation: animation)) {
                             VStack {
                                 ZStack {
+                                    
                                     Rectangle()
                                         .foregroundColor(.white)
+                                    Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
                                     if (editModeIsOn) {
                                         ZStack {
                                             Rectangle()
