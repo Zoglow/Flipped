@@ -40,12 +40,47 @@ struct TimelineView: View {
 
                                 TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                                     .zIndex(3)
+                                    
                                 
                                 addFrameButton(isToLeft: false)
                             }
                             .id(frame.id)
                             .padding(.horizontal, -33)
                             .zIndex(3)
+                            .contextMenu {
+                                
+                                Button {
+                                    let index = animation.frames.firstIndex(of: animation.selectedFrame!)
+                                    print("Currently selected index: " + index!.description)
+                                    
+                                    try! realm.write {
+                                        let thisAnimation = animation.thaw()
+                                        
+                                        
+                                        // This needs work
+                                        if (thisAnimation?.frames.count == 1) {
+                                            canvas.drawing = PKDrawing()
+                                        } else if ((index! - 1) < 0) {
+                                            thisAnimation?.selectedFrame = thisAnimation?.frames[index!+1]
+                                            canvas.drawing = try PKDrawing(data: (thisAnimation?.selectedFrame!.frameData)!)
+
+                                            thisAnimation!.frames.remove(at: index!)
+                                        } else {
+                                            thisAnimation?.selectedFrame = thisAnimation?.frames[index!-1]
+                                            canvas.drawing = try PKDrawing(data: (thisAnimation?.selectedFrame!.frameData)!)
+                                            
+                                            thisAnimation!.frames.remove(at: index!)
+                                        }
+                                    }
+                                    
+                                } label: {
+                                    VStack {
+                                        Text("Delete")
+                                    }
+                                    
+                                }
+                                    
+                            }
                             
                         } else {
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)

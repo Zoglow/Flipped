@@ -26,15 +26,12 @@ struct OnionSkinView: UIViewRepresentable {
         canvas.isOpaque = false
         
         let selectedFrameIndex = animation.frames.firstIndex(of: animation.selectedFrame!)
-        print("Selected frame index: " + selectedFrameIndex!.description)
-        
         let onionSkinIndex = selectedFrameIndex! + indexModifier
         
-        if (onionSkinIndex >= 0 && onionSkinIndex < animation.frames.count) { // doesnt work
+        if (onionSkinIndex >= 0 && onionSkinIndex < animation.frames.count) {
             canvas.drawing = try! PKDrawing(data: animation.frames[onionSkinIndex].frameData)
         } else {
             canvas.drawing = PKDrawing()
-            print("Onion skin out of bounds")
         }
         
         return canvas
@@ -42,15 +39,12 @@ struct OnionSkinView: UIViewRepresentable {
 
     func updateUIView(_ canvasView: PKCanvasView, context: Context) {
         let selectedFrameIndex = animation.frames.firstIndex(of: animation.selectedFrame!)
-        print("Selected frame index: " + selectedFrameIndex!.description)
-        
         let onionSkinIndex = selectedFrameIndex! + indexModifier
         
-        if (onionSkinIndex >= 0 && onionSkinIndex < animation.frames.count) { // doesnt work
+        if (onionSkinIndex >= 0 && onionSkinIndex < animation.frames.count) {
             canvas.drawing = try! PKDrawing(data: animation.frames[onionSkinIndex].frameData)
         } else {
             canvas.drawing = PKDrawing()
-            print("Onion skin out of bounds")
         }
     }
     

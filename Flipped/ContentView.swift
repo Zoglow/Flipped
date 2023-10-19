@@ -16,9 +16,12 @@ struct ContentView: View {
     @Environment(\.realmConfiguration) var conf
     
     @ObservedResults(Animation.self) var animations
+    var newAnimation = Animation()
     
     private let adaptiveColumns = [GridItem(.adaptive(minimum: 250))]
     @State var editModeIsOn = false
+    
+    
     
     var body: some View {
         
@@ -57,6 +60,10 @@ struct ContentView: View {
                     }
                     
                 }
+                .onAppear(perform: {
+                    newAnimation.selectedFrame = Frame()
+                    newAnimation.frames.append(newAnimation.selectedFrame!)
+                })
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
@@ -65,10 +72,12 @@ struct ContentView: View {
                             }
                         }, label: {
                             Text(editModeIsOn ? "Done" : "Edit")
-                        })
+                        }) // Edit button
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: addItem) {
+                        Button {
+                            addItem()
+                        } label: {
                             Image(systemName: "plus")
                         }
                     }
@@ -83,16 +92,19 @@ struct ContentView: View {
     }
     
     private func addItem() {
-        let newAnimation = Animation()
-        $animations.append(newAnimation)
+        let item = Animation()
+        $animations.append(item)
         
         try? realm.write {
-            newAnimation.selectedFrame = Frame()
-            newAnimation.frames.append(newAnimation.selectedFrame!)
+            item.selectedFrame = Frame()
+            item.frames.append(item.selectedFrame!)
         }
-            
+        // Doesn't do anything >
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            AnimationView(animation: item)
+        }
+        
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {
