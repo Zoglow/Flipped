@@ -21,7 +21,6 @@ struct TimelineView: View {
     
     @ObservedRealmObject var animation: Animation
     
-    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 50) //timeline bg
@@ -36,13 +35,12 @@ struct TimelineView: View {
                         
                         if (frame == animation.selectedFrame) {
                             HStack {
-                                addFrameButton(isToLeft: true)
+                                addFrameButton(isToLeft: true, frame: frame)
 
                                 TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                                     .zIndex(3)
                                     
-                                
-                                addFrameButton(isToLeft: false)
+                                addFrameButton(isToLeft: false, frame: frame)
                             }
                             .scrollTransition(axis: .horizontal) {
                                 content, phase in
@@ -53,6 +51,7 @@ struct TimelineView: View {
                             .zIndex(3)
                             .contextMenu {
                                 
+                                //Delete frame
                                 Button {
                                     let index = animation.frames.firstIndex(of: animation.selectedFrame!)
                                     print("Currently selected index: " + index!.description)
@@ -126,30 +125,27 @@ struct TimelineView: View {
     }
     
     func startPlayback() {
+        animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
         guard !animation.frames.isEmpty else { return }
         let index = animation.frames.firstIndex(of: animation.selectedFrame!)
-        playFrame(index: index!)
+        playFrame(index: index!, animation: animation.thaw()!)
     }
     
-    func playFrame(index: Int) {
-        guard isPlaying else { return }
+    func playFrame(index: Int, animation: Animation) {
         
+        guard isPlaying else { return }
         let nextIndex = (index + 1) % animation.frames.count
 
         withAnimation {
             try! realm.write {
-                let thisAnimation = animation.thaw()
-                thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation() // This is not efficient -- should only save once when play button is pressed
-                
-                thisAnimation!.selectedFrame = thisAnimation?.frames[nextIndex]
-                canvas.drawing = try PKDrawing(data: thisAnimation!.selectedFrame!.frameData)
-                
+                animation.selectedFrame = animation.frames[nextIndex]
+                canvas.drawing = try PKDrawing(data: animation.selectedFrame!.frameData)
             }
         }
 
         // Delay between frames (adjust as needed)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            playFrame(index: nextIndex)
+            playFrame(index: nextIndex, animation: animation)
         }
     }
 
@@ -157,23 +153,12 @@ struct TimelineView: View {
         isPlaying = false
     }
     
-    func addFrameButton(isToLeft: Bool) -> some View {
+    func addFrameButton(isToLeft: Bool, frame: Frame) -> some View {
         return AnyView (
             Button {
                 
-                try? realm.write {
-                    let thisAnimation = animation.thaw()
-                    thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
-                    
-                    let newFrame = Frame()
-                    let index = thisAnimation?.frames.firstIndex(of: (thisAnimation?.selectedFrame)!)
-                    
-                    thisAnimation?.selectedFrame = newFrame
-                    thisAnimation?.frames.insert(newFrame, at: isToLeft ? index! : index! + 1)
-                    
-                    canvas.drawing = PKDrawing()
-                    canvas.drawing = try PKDrawing(data: thisAnimation?.selectedFrame?.frameData ?? Data())
-                }
+                animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
+                
             } label: {
                 ZStack {
                     Rectangle()

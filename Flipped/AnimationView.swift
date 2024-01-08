@@ -27,7 +27,8 @@ struct AnimationView: View {
 
     
     var body: some View {
-            
+        
+
         ZStack(alignment: .center) {
             Color.white
                 .ignoresSafeArea()
@@ -67,14 +68,13 @@ struct AnimationView: View {
             }
             
             CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
-                .onAppear(perform: { loadDrawing() })
-                .onDisappear(perform: { saveDrawing() })
+                .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
+                .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .ignoresSafeArea()
             
             
             if (!isFocused) {
                 VStack {
-                    
                     Spacer()
                     TimelineView(canvas: $canvas, animation: animation).scaleEffect(scaleEffect)
                     
@@ -123,7 +123,7 @@ struct AnimationView: View {
 
                 }
             }
-            
+//            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     isFocused.toggle()
@@ -131,13 +131,15 @@ struct AnimationView: View {
                     Image(systemName: "rectangle.expand.vertical")
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    saveDrawing()
-                } label: {
-                    Image(systemName: "square.and.arrow.down")
-                }
-            }
+            
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button {
+//                    animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame)
+//                } label: {
+//                    Image(systemName: "square.and.arrow.down")
+//                }
+//            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     onionSkinModeIsOn.toggle()
@@ -145,39 +147,15 @@ struct AnimationView: View {
                     Image(systemName: "square.3.stack.3d.middle.fill")
                 }
             }
-        }.gesture(
-            MagnificationGesture()
-                .onEnded({ fingerDistance in
-                    isFocused = (fingerDistance > 1 ? true : false)
-                })
-        )
+        }
+//        .gesture(
+//            MagnificationGesture()
+//                .onEnded({ fingerDistance in
+//                    isFocused = (fingerDistance > 1 ? true : false)
+//                })
+//        )
         
     } // End of View
-        
-    
-    func saveDrawing() {
-        let thisAnimation = animation.thaw()
-        try! realm.write {
-            thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
-            print("Frame data saved: " + (thisAnimation?.selectedFrame?.frameData.debugDescription ?? "No data found"))
-        }
-        loadDrawing()
-        
-    }
-    
-    func loadDrawing() {
-        
-        print("loadDrawing() called")
-        
-        if let savedData = animation.selectedFrame?.frameData {
-            print("Frame data loaded: " + savedData.debugDescription)
-            if let loadedDrawing = try? PKDrawing(data: savedData) {
-                drawing = loadedDrawing
-                canvas.drawing = drawing
-            }
-        }
-    }
-    
     
 }
 

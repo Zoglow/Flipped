@@ -22,15 +22,7 @@ struct TimelineFrame: View {
     var body: some View {
         
         Button {
-            try? realm.write {
-                let thisAnimation = animation.thaw()
-                let thisFrame = thisFrame.thaw()
-                
-                thisAnimation?.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
-                thisAnimation?.selectedFrame = thisFrame
-                
-                canvas.drawing = try PKDrawing(data: thisAnimation?.selectedFrame?.frameData ?? Data())
-            }
+            animation.saveDrawing(canvas: canvas, frame: thisFrame)
         } label: {
             
             ZStack {

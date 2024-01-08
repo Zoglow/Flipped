@@ -22,8 +22,6 @@ struct ContentView: View {
     private let adaptiveColumns = [GridItem(.adaptive(minimum: 250))]
     @State var editModeIsOn = false
     
-    
-    
     var body: some View {
         
         NavigationStack {
@@ -104,6 +102,7 @@ struct ContentView: View {
             item.selectedFrame = Frame()
             item.frames.append(item.selectedFrame!)
         }
+        
         // Doesn't do anything >
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 //            AnimationView(animation: item)
