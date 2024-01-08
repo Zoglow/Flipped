@@ -33,13 +33,20 @@ struct TimelineFrame: View {
             }
         } label: {
             
-            Rectangle()
-                .frame(width: 125, height: 100)
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-                .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
-                .padding(.vertical, thisFrame == animation.selectedFrame ? 10 : 0)
-                .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.white)
+                Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    
+            }
+            .frame(width: 125, height: 100)
+            .shadow(radius: 5)
+            .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
+            .padding(.vertical, thisFrame == animation.selectedFrame ? 10 : 0)
+            .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
+            
 
         }
 
