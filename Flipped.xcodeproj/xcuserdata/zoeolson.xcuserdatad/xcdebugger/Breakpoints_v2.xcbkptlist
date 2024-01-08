@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "02F93CA0-495B-41F6-8B70-7A8E10839BBD"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8FFE534B-9AB6-4122-B941-E522186DCEE8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Flipped/CanvasView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "canvasViewDrawingDidChange(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8FFE534B-9AB6-4122-B941-E522186DCEE8 - 160065aac09b08f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Flipped.CanvasView.canvasViewDrawingDidChange(__C.PKCanvasView) -&gt; ()"
+                  moduleName = "Flipped"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoeolson/Library/Mobile%20Documents/com~apple~CloudDocs/Projects/Coding/Xcode%20Projects/Flipped/Flipped/CanvasView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "8FFE534B-9AB6-4122-B941-E522186DCEE8 - 160065aac09b08f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Flipped.CanvasView.canvasViewDrawingDidChange(__C.PKCanvasView) -&gt; ()"
+                  moduleName = "Flipped"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoeolson/Library/Mobile%20Documents/com~apple~CloudDocs/Projects/Coding/Xcode%20Projects/Flipped/Flipped/CanvasView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "276">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A2B06428-F385-45A4-9E70-6AEDB86FA271"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Flipped/OnionSkinView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "makeUIView(context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C393B1B-91EB-4D53-8111-1B14EAB30C48"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Flipped/OnionSkinView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "makeUIView(context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

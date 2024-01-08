@@ -105,9 +105,9 @@ struct ContentView: View {
             item.frames.append(item.selectedFrame!)
         }
         // Doesn't do anything >
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            AnimationView(animation: item)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            AnimationView(animation: item)
+//        }
         
     }
 }

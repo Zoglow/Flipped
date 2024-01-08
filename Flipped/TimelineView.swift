@@ -31,7 +31,7 @@ struct TimelineView: View {
                 
             ScrollView(.horizontal) {
                 HStack(alignment: .center) { //Frames
-                    
+                
                     ForEach(animation.frames) { frame in
                         
                         if (frame == animation.selectedFrame) {
@@ -43,6 +43,10 @@ struct TimelineView: View {
                                     
                                 
                                 addFrameButton(isToLeft: false)
+                            }
+                            .scrollTransition(axis: .horizontal) {
+                                content, phase in
+                                content.opacity(phase.isIdentity ? 1 : 0)
                             }
                             .id(frame.id)
                             .padding(.horizontal, -33)
@@ -73,25 +77,30 @@ struct TimelineView: View {
                                         }
                                     }
                                     
-                                } label: {
-                                    VStack {
-                                        Text("Delete")
-                                    }
-                                    
-                                }
+                                } label: { Text("Delete") }
                                     
                             }
                             
                         } else {
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+                                .scrollTransition(axis: .horizontal) {
+                                    content, phase in
+                                    content.opacity(phase.isIdentity ? 1 : 0)
+                                }
                         }
                     }
+                    
                 }
+//                .frame(width: 600, alignment: .center)
+                .scrollTargetLayout()
                 .padding(10)
                 .padding(.horizontal, 40)
                 
             }
-            .frame(width: 550)
+            .frame(width: 550, alignment: .center)
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.viewAligned)
+        
             
             HStack(alignment: .center) { //timeline controls
                 Button {
