@@ -27,7 +27,7 @@ struct TimelineFrame: View {
             
             ZStack {
                 Rectangle()
-//                    .foregroundColor(.white)
+                    .foregroundColor(.white)
                 Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
                     .resizable()
                     .aspectRatio(contentMode: .fit)

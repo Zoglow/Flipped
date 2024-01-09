@@ -31,10 +31,9 @@ struct ContentView: View {
                         NavigationLink(destination: AnimationView(animation: animation)) {
                             VStack {
                                 ZStack {
-                                    
                                     Rectangle()
-//                                        .foregroundColor(.white)
-                                    Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
+                                        .foregroundStyle(.white)
+                                    Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                     if (editModeIsOn) {
@@ -55,7 +54,6 @@ struct ContentView: View {
                                 .frame(width: 170, height: 150)
                                 .cornerRadius(3)
                                 .shadow(radius: 5)
-                                
                                 
                                 Text(animation.title).foregroundColor(.black)
                             }.padding(5)
@@ -92,8 +90,7 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .padding(20)
         }
-//        .background(.white) 
-//        .preferredColorScheme(.light)
+        .background(.white)
     }
     
     private func addItem() {
@@ -111,6 +108,8 @@ struct ContentView: View {
 //        }
         
     }
+    
+
 }
 
 struct ContentView_Previews: PreviewProvider {

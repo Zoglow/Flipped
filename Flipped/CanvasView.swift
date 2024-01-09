@@ -21,6 +21,7 @@ struct CanvasView: UIViewRepresentable {
     @ObservedRealmObject var selectedFrame: Frame
     
     func makeUIView(context: Context) -> PKCanvasView {
+
         canvas.drawingPolicy = .anyInput
         canvas.tool = PKInkingTool(.pen, color: .black, width: 15)
         canvas.isOpaque = false

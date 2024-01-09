@@ -21,7 +21,9 @@ struct TimelineView: View {
     @Binding var canvas: PKCanvasView
     @Binding var isPlaying: Bool
     @Binding var frameImage: Image
+    @Binding var onionSkinModeIsOn: Bool
     
+    @State var onionSkinModeWasOn: Bool?
     
     @ObservedRealmObject var animation: Animation
     
@@ -82,10 +84,11 @@ struct TimelineView: View {
                             
                         } else {
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
-                            .scrollTransition(axis: .horizontal) {
-                                content, phase in
-                                content.opacity(phase.isIdentity ? 1 : 0)
-                            }
+//                              
+                                .scrollTransition(axis: .horizontal) {
+                                    content, phase in
+                                    content.opacity(phase.isIdentity ? 1 : 0)
+                                }
                             
                         }
                     }
@@ -128,12 +131,12 @@ struct TimelineView: View {
     
     func startPlayback() {
         
+        onionSkinModeWasOn = onionSkinModeIsOn
+        onionSkinModeIsOn = false
+        
         animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
         
-        
         guard !animation.frames.isEmpty else { return }
-        
-        
         
         var frameImages: [Image] = []
 
@@ -143,7 +146,7 @@ struct TimelineView: View {
         }
         
         let thisAnimation = animation.thaw()
-        canvas.drawing = PKDrawing()
+//        canvas.drawing = PKDrawing()
         
         let index = animation.frames.firstIndex(of: animation.selectedFrame!)
         
@@ -151,6 +154,8 @@ struct TimelineView: View {
     }
     
     func playFrame(index: Int, images: [Image], animation: Animation) {
+        
+        
         
         guard isPlaying else { return }
         
@@ -171,10 +176,12 @@ struct TimelineView: View {
         // Delay between frames (adjust as needed)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             playFrame(index: nextIndex, images: images, animation: animation)
+            
         }
     }
 
     func stopPlayback() {
+        onionSkinModeIsOn = onionSkinModeWasOn!
         canvas.drawing = try! PKDrawing(data: animation.selectedFrame!.frameData)
         isPlaying = false
     }
@@ -189,7 +196,7 @@ struct TimelineView: View {
                 ZStack {
                     Rectangle()
                         .frame(width: 37, height: 45)
-//                        .foregroundColor(.white)
+                        .foregroundColor(.white)
                         .shadow(radius: 5)
                     Image(systemName: "plus")
                         .foregroundColor(.black)

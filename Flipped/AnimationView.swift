@@ -32,8 +32,8 @@ struct AnimationView: View {
         
 
         ZStack(alignment: .center) {
-//            Color.white
-//                .ignoresSafeArea()
+            Color.white
+                .ignoresSafeArea()
             
             if (onionSkinModeIsOn) {
                 
@@ -68,22 +68,22 @@ struct AnimationView: View {
                     .ignoresSafeArea()
                 
             }
-        
-            CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
-                .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
-                .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
-                .ignoresSafeArea()
             
             if (isPlaying) {
                 frameImage
                     .resizable()
+                    .ignoresSafeArea()
+            } else {
+                CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
+                    .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
+                    .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                     .ignoresSafeArea()
             }
             
             if (!isFocused) {
                 VStack {
                     Spacer()
-                    TimelineView(canvas: $canvas, isPlaying: $isPlaying, frameImage: $frameImage, animation: animation).scaleEffect(scaleEffect)
+                    TimelineView(canvas: $canvas, isPlaying: $isPlaying, frameImage: $frameImage, onionSkinModeIsOn: $onionSkinModeIsOn, animation: animation).scaleEffect(scaleEffect)
                 }
                 HStack {
                     ToolbarView(canvas: $canvas).scaleEffect(scaleEffect)
@@ -166,14 +166,33 @@ struct AnimationView: View {
 }
 
 extension PKDrawing {
+    
     func generateThumbnail(scale: CGFloat) -> UIImage {
         
         let screen = UIScreen.main.bounds
+        let traitCollection = UITraitCollection(userInterfaceStyle: .light)
         
-        return self.image(from: CGRect(origin: .zero, size: CGSize(width: screen.width, height: screen.height)), scale: scale)
+        var thumbnail = UIImage()
+        
+        traitCollection.performAsCurrent {
+            thumbnail = self.image(from: CGRect(origin: .zero, size: CGSize(width: screen.width, height: screen.height)), scale: scale)
+        }
+        
+        return thumbnail
         
     }
 }
+
+//let darkImage = thumbnail(drawing: drawing, thumbnailRect: frameForImage, traitCollection: UITraitCollection(userInterfaceStyle: .dark))
+
+//func thumbnail(drawing: PKDrawing, thumbnailRect: CGRect, traitCollection: UITraitCollection) -> UIImage {
+//
+//    var image = UIImage()
+//    traitCollection.performAsCurrent {
+//        image = drawing.image(from: thumbnailRect, scale: 2.0)
+//    }
+//    return image
+//}
 
 
 //struct AnimationView_Previews: PreviewProvider {
