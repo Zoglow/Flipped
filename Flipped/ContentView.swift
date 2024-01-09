@@ -93,7 +93,7 @@ struct ContentView: View {
             .padding(20)
         }
 //        .background(.white) 
-        .preferredColorScheme(.light)
+//        .preferredColorScheme(.light)
     }
     
     private func addItem() {
