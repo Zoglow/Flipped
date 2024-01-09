@@ -33,7 +33,7 @@ struct ContentView: View {
                                 ZStack {
                                     
                                     Rectangle()
-                                        .foregroundColor(.white)
+//                                        .foregroundColor(.white)
                                     Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -91,7 +91,9 @@ struct ContentView: View {
             .navigationTitle("Gallery")
             .navigationBarTitleDisplayMode(.inline)
             .padding(20)
-        }.background(.white)
+        }
+//        .background(.white) 
+        .preferredColorScheme(.light)
     }
     
     private func addItem() {

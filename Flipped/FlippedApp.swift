@@ -11,7 +11,8 @@ import SwiftUI
 struct FlippedApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().preferredColorScheme(.light)
+            ContentView()
+                .preferredColorScheme(.light)
         }
     }
 }

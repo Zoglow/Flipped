@@ -18,9 +18,11 @@ struct AnimationView: View {
     
     @State var canvas = PKCanvasView()
     @State var drawing = PKDrawing()
+    @State var frameImage = Image(systemName: "gear")
     @State var scaleEffect = 0.75
     @State public var onionSkinModeIsOn = true
     
+    @State private var isPlaying = false
     @State private var isFocused = false
     @State private var isEditingTitle = false
     @State private var editableTitle = ""
@@ -30,8 +32,8 @@ struct AnimationView: View {
         
 
         ZStack(alignment: .center) {
-            Color.white
-                .ignoresSafeArea()
+//            Color.white
+//                .ignoresSafeArea()
             
             if (onionSkinModeIsOn) {
                 
@@ -66,18 +68,22 @@ struct AnimationView: View {
                     .ignoresSafeArea()
                 
             }
-            
+        
             CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
                 .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .ignoresSafeArea()
             
+            if (isPlaying) {
+                frameImage
+                    .resizable()
+                    .ignoresSafeArea()
+            }
             
             if (!isFocused) {
                 VStack {
                     Spacer()
-                    TimelineView(canvas: $canvas, animation: animation).scaleEffect(scaleEffect)
-                    
+                    TimelineView(canvas: $canvas, isPlaying: $isPlaying, frameImage: $frameImage, animation: animation).scaleEffect(scaleEffect)
                 }
                 HStack {
                     ToolbarView(canvas: $canvas).scaleEffect(scaleEffect)
@@ -148,12 +154,12 @@ struct AnimationView: View {
                 }
             }
         }
-//        .gesture(
-//            MagnificationGesture()
-//                .onEnded({ fingerDistance in
-//                    isFocused = (fingerDistance > 1 ? true : false)
-//                })
-//        )
+        .gesture(
+            MagnificationGesture()
+                .onEnded({ fingerDistance in
+                    isFocused = (fingerDistance > 1 ? true : false)
+                })
+        )
         
     } // End of View
     
@@ -165,6 +171,7 @@ extension PKDrawing {
         let screen = UIScreen.main.bounds
         
         return self.image(from: CGRect(origin: .zero, size: CGSize(width: screen.width, height: screen.height)), scale: scale)
+        
     }
 }
 

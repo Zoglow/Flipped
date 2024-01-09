@@ -14,10 +14,14 @@ struct TimelineView: View {
     @Environment(\.realm) var realm
     @Environment(\.realmConfiguration) var conf
 
-    @State private var isPlaying = false;
+    
     @State private var timer: Timer?
+    @State var selectedFrameIndex: Int?
     
     @Binding var canvas: PKCanvasView
+    @Binding var isPlaying: Bool
+    @Binding var frameImage: Image
+    
     
     @ObservedRealmObject var animation: Animation
     
@@ -26,7 +30,6 @@ struct TimelineView: View {
             RoundedRectangle(cornerRadius: 50) //timeline bg
                 .frame(width:700, height: 50)
                 .foregroundColor(.black.opacity(0.25))
-            
                 
             ScrollView(.horizontal) {
                 HStack(alignment: .center) { //Frames
@@ -35,16 +38,13 @@ struct TimelineView: View {
                         
                         if (frame == animation.selectedFrame) {
                             HStack {
-                                addFrameButton(isToLeft: true, frame: frame)
+                                if (!isPlaying) { addFrameButton(isToLeft: true, frame: frame) }
 
                                 TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                                     .zIndex(3)
-                                    
-                                addFrameButton(isToLeft: false, frame: frame)
-                            }
-                            .scrollTransition(axis: .horizontal) {
-                                content, phase in
-                                content.opacity(phase.isIdentity ? 1 : 0)
+                                
+                                if (!isPlaying) { addFrameButton(isToLeft: false, frame: frame) }
+                                
                             }
                             .id(frame.id)
                             .padding(.horizontal, -33)
@@ -82,10 +82,11 @@ struct TimelineView: View {
                             
                         } else {
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
-                                .scrollTransition(axis: .horizontal) {
-                                    content, phase in
-                                    content.opacity(phase.isIdentity ? 1 : 0)
-                                }
+                            .scrollTransition(axis: .horizontal) {
+                                content, phase in
+                                content.opacity(phase.isIdentity ? 1 : 0)
+                            }
+                            
                         }
                     }
                     
@@ -103,7 +104,6 @@ struct TimelineView: View {
             
             HStack(alignment: .center) { //timeline controls
                 Button {
-                    
                     isPlaying.toggle()
                     isPlaying ? startPlayback() : stopPlayback()
                 } label: {
@@ -120,36 +120,62 @@ struct TimelineView: View {
             .padding([.leading,.trailing], 20)
                
             
-        }.frame(width:700)
+        }
+        .frame(width:700)
+        
         
     }
     
     func startPlayback() {
+        
         animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
+        
+        
         guard !animation.frames.isEmpty else { return }
+        
+        
+        
+        var frameImages: [Image] = []
+
+        for frame in animation.frames {
+            let frameImage = Image(uiImage: try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1))
+            frameImages.append(frameImage)
+        }
+        
+        let thisAnimation = animation.thaw()
+        canvas.drawing = PKDrawing()
+        
         let index = animation.frames.firstIndex(of: animation.selectedFrame!)
-        playFrame(index: index!, animation: animation.thaw()!)
+        
+        playFrame(index: index!, images: frameImages, animation: thisAnimation!)
     }
     
-    func playFrame(index: Int, animation: Animation) {
+    func playFrame(index: Int, images: [Image], animation: Animation) {
         
         guard isPlaying else { return }
-        let nextIndex = (index + 1) % animation.frames.count
+        
+        frameImage = images[index]
+        let nextIndex = (index + 1) % images.count
+        
+        selectedFrameIndex = nextIndex
 
-        withAnimation {
-            try! realm.write {
-                animation.selectedFrame = animation.frames[nextIndex]
-                canvas.drawing = try PKDrawing(data: animation.selectedFrame!.frameData)
-            }
-        }
+//        withAnimation {
+//            try! realm.write {
+//                animation.selectedFrame = animation.frames[nextIndex]
+//                canvas.drawing = try PKDrawing(data: animation.selectedFrame!.frameData)
+                
+//            }
+//            
+//        }
 
         // Delay between frames (adjust as needed)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            playFrame(index: nextIndex, animation: animation)
+            playFrame(index: nextIndex, images: images, animation: animation)
         }
     }
 
     func stopPlayback() {
+        canvas.drawing = try! PKDrawing(data: animation.selectedFrame!.frameData)
         isPlaying = false
     }
     
@@ -163,7 +189,7 @@ struct TimelineView: View {
                 ZStack {
                     Rectangle()
                         .frame(width: 37, height: 45)
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
                         .shadow(radius: 5)
                     Image(systemName: "plus")
                         .foregroundColor(.black)
