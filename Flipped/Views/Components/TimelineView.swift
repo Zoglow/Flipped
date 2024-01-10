@@ -159,24 +159,17 @@ struct TimelineView: View {
         
         guard isPlaying else { return }
         
+//        try! realm.write {
+//            animation.selectedFrame = animation.frames[index]
+//        }
+        
         frameImage = images[index]
+        
         let nextIndex = (index + 1) % images.count
         
-        selectedFrameIndex = nextIndex
-
-//        withAnimation {
-//            try! realm.write {
-//                animation.selectedFrame = animation.frames[nextIndex]
-//                canvas.drawing = try PKDrawing(data: animation.selectedFrame!.frameData)
-                
-//            }
-//            
-//        }
-
         // Delay between frames (adjust as needed)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             playFrame(index: nextIndex, images: images, animation: animation)
-            
         }
     }
 
@@ -189,9 +182,7 @@ struct TimelineView: View {
     func addFrameButton(isToLeft: Bool, frame: Frame) -> some View {
         return AnyView (
             Button {
-                
                 animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
-                
             } label: {
                 ZStack {
                     Rectangle()
