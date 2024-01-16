@@ -79,7 +79,11 @@ struct TimelineView: View {
                                     }
                                     
                                 } label: { Text("Delete") }
+                                Button {
                                     
+                                    
+                                } label: { Text("Delete") }
+                                
                             }
                             
                         } else {
