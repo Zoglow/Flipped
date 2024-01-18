@@ -36,24 +36,33 @@ struct ContentView: View {
                                     Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                    if (editModeIsOn) {
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor(.black)
-                                                .opacity(0.1)
-                                                .onTapGesture {
-                                                    $animations.remove(animation)
-                                                }
-                                            Image(systemName: "x.circle.fill")
-                                                .foregroundColor(Color.pink)
-                                                .font(.title)
-                                        }.zIndex(2)
-                                    }
+//                                    if (editModeIsOn) {
+//                                        ZStack {
+//                                            Rectangle()
+//                                                .foregroundColor(.black)
+//                                                .opacity(0.1)
+//                                                .onTapGesture {
+//                                                    $animations.remove(animation)
+//                                                }
+//                                            Image(systemName: "x.circle.fill")
+//                                                .foregroundColor(Color.pink)
+//                                                .font(.title)
+//                                        }.zIndex(2)
+//                                    }
                                     
                                 } // Preview plus edit overlay
                                 .frame(width: 170, height: 150)
                                 .cornerRadius(3)
                                 .shadow(radius: 5)
+                                .contextMenu {
+                                    Button {
+                                        $animations.remove(animation)
+                                    } label: {
+                                        Text("Delete")
+                                        Image(systemName: "x.circle.fill")
+                                    }
+
+                                }
                                 
                                 Text(animation.title).foregroundColor(.black)
                             }.padding(5)
@@ -66,15 +75,15 @@ struct ContentView: View {
                     newAnimation.frames.append(newAnimation.selectedFrame!)
                 })
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                editModeIsOn.toggle()
-                            }
-                        }, label: {
-                            Text(editModeIsOn ? "Done" : "Edit")
-                        }) // Edit button
-                    }
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        Button(action: {
+//                            withAnimation(.easeInOut(duration: 0.2)) {
+//                                editModeIsOn.toggle()
+//                            }
+//                        }, label: {
+//                            Text(editModeIsOn ? "Done" : "Edit")
+//                        }) // Edit button
+//                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
                             addItem()
