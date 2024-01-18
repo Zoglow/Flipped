@@ -66,6 +66,26 @@ final class Animation: Object, ObjectKeyIdentifiable {
         loadDrawing(canvas: canvas, frame: newFrame)
         
     }
+    
+    func duplicateFrame(canvas: PKCanvasView, frame: Frame) {
+        
+        let animation = self.thaw()
+        let realm = animation?.realm
+        let newFrame = Frame()
+        
+        saveDrawing(canvas: canvas, frame: frame)
+        
+        try? realm?.write {
+            
+            let index = animation!.frames.firstIndex(of: (animation!.selectedFrame)!)
+            animation!.selectedFrame = newFrame
+            newFrame.frameData = frame.frameData
+            animation!.frames.insert(newFrame, at: index! + 1)
+        }
+        
+        loadDrawing(canvas: canvas, frame: newFrame)
+        
+    }
 
 }
 

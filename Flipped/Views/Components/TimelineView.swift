@@ -53,7 +53,7 @@ struct TimelineView: View {
                             .zIndex(3)
                             .contextMenu {
                                 
-                                //Delete frame
+                                // Delete frame
                                 Button {
                                     let index = animation.frames.firstIndex(of: animation.selectedFrame!)
                                     print("Currently selected index: " + index!.description)
@@ -78,35 +78,42 @@ struct TimelineView: View {
                                         }
                                     }
                                     
-                                } label: { Text("Delete") }
+                                } label: {
+                                    Text("Delete")
+                                    Image(systemName: "x.circle.fill")
+                                }
+                                // Duplicate frame
                                 Button {
-                                    
-                                    
-                                } label: { Text("Delete") }
+                                    animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
+                                    animation.duplicateFrame(canvas: canvas, frame: animation.selectedFrame!)
+                                } label: {
+                                    Text("Duplicate")
+                                    Image(systemName: "plus.square.fill.on.square.fill")
+                                }
                                 
                             }
                             
                         } else {
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
 //                              
-                                .scrollTransition(axis: .horizontal) {
-                                    content, phase in
-                                    content.opacity(phase.isIdentity ? 1 : 0)
-                                }
+//                                .scrollTransition(axis: .horizontal) {
+//                                    content, phase in
+//                                    content.opacity(phase.isIdentity ? 1 : 0)
+//                                }
                             
                         }
                     }
                     
                 }
 //                .frame(width: 600, alignment: .center)
-                .scrollTargetLayout()
+//                .scrollTargetLayout()
                 .padding(10)
                 .padding(.horizontal, 40)
                 
             }
             .frame(width: 550, alignment: .center)
             .scrollIndicators(.hidden)
-            .scrollTargetBehavior(.viewAligned)
+//            .scrollTargetBehavior(.viewAligned)
         
             
             HStack(alignment: .center) { //timeline controls
