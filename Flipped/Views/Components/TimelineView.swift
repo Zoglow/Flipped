@@ -32,10 +32,9 @@ struct TimelineView: View {
             RoundedRectangle(cornerRadius: 50) //timeline bg
                 .frame(width:700, height: 50)
                 .foregroundColor(.black.opacity(0.25))
-                
+            
             ScrollView(.horizontal) {
-                HStack(alignment: .center) { //Frames
-                
+                HStack() { //Frames
                     ForEach(animation.frames) { frame in
                         
                         if (frame == animation.selectedFrame) {
@@ -95,7 +94,7 @@ struct TimelineView: View {
                             
                         } else {
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
-//                              
+//
 //                                .scrollTransition(axis: .horizontal) {
 //                                    content, phase in
 //                                    content.opacity(phase.isIdentity ? 1 : 0)
@@ -103,18 +102,15 @@ struct TimelineView: View {
                             
                         }
                     }
-                    
                 }
-//                .frame(width: 600, alignment: .center)
-//                .scrollTargetLayout()
+                .frame(width: 550, height: 150, alignment: .center)
+                .scrollTargetLayout()
                 .padding(10)
-                .padding(.horizontal, 40)
                 
             }
-            .frame(width: 550, alignment: .center)
+            .frame(width: 550, height: 150)
             .scrollIndicators(.hidden)
 //            .scrollTargetBehavior(.viewAligned)
-        
             
             HStack(alignment: .center) { //timeline controls
                 Button {
@@ -136,6 +132,8 @@ struct TimelineView: View {
             
         }
         .frame(width:700)
+        
+        
         
         
     }
