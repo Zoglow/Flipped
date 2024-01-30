@@ -33,15 +33,13 @@ struct CanvasView: UIViewRepresentable {
     }
 
     func updateUIView(_ canvasView: PKCanvasView, context: Context) {
-    
-//        if let loadedDrawing = try? PKDrawing(data: selectedFrame.frameData) {
-//            drawing = loadedDrawing
-//        }
-        
+//        animation.saveDrawing(canvas: canvas, frame: selectedFrame)
     }
     
     // Never gets called
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
+        
+        print("Canvas view drawing changed")
         // Ensure there's a selected frame
         guard let selectedFrame = selectedFrame.thaw() else {
             print("No selected frame")

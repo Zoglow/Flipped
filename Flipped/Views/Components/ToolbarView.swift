@@ -18,10 +18,12 @@ struct ToolbarView: View {
     @Environment(\.undoManager) private var undoManager
     @Binding var canvas: PKCanvasView
     @State private var selectedTool: DrawingTool? = .pencil  // Default to pencil
-
+  
+    let toolPicker = PKToolPicker.self
+    
     let pencil = PKInkingTool(.pencil, color: .black, width: 10)
     let knife = PKLassoTool()
-    let eraser = PKEraserTool(.vector)
+    let eraser = PKEraserTool(.bitmap)
 
     var body: some View {
         ZStack {

@@ -73,12 +73,13 @@ struct AnimationView: View {
                 frameImage
                     .resizable()
                     .ignoresSafeArea()
-            } else {
-                CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
-                    .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
-                    .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
-                    .ignoresSafeArea()
             }
+            
+            CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
+                .opacity(isPlaying ? 0 : 1)
+                .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
+                .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
+                .ignoresSafeArea()
             
             if (!isFocused) {
                 VStack {
