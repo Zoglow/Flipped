@@ -14,9 +14,8 @@ struct TimelineView: View {
     @Environment(\.realm) var realm
     @Environment(\.realmConfiguration) var conf
 
-    
+    @State var selectedFrame: Frame?
     @State private var timer: Timer?
-    @State var selectedFrameIndex: Int?
     
     @Binding var canvas: PKCanvasView
     @Binding var isPlaying: Bool
@@ -39,14 +38,14 @@ struct TimelineView: View {
                         TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                     }
                 }
-                .frame(height: 150, alignment: .center)
+                .frame(height: 150)
                 .scrollTargetLayout()
-                .padding(10)
-                
             }
-            .frame(width: 550, height: 150)
+            .frame(width: 500, height: 150)
+            .safeAreaPadding(.horizontal, 30)
             .scrollIndicators(.hidden)
-//            .scrollTargetBehavior(.viewAligned)
+            .scrollTargetBehavior(.viewAligned)
+//            .scrollPosition(id: $selectedFrame, anchor: .center)
             
             HStack(alignment: .center) { //timeline controls
                 Button {
@@ -68,9 +67,6 @@ struct TimelineView: View {
             
         }
         .frame(width:700)
-        
-        
-        
         
     }
     
