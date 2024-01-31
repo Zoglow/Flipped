@@ -89,4 +89,20 @@ final class Animation: Object, ObjectKeyIdentifiable {
 
 }
 
+extension Animation {
+    static func previewAnimation(in realm: Realm) -> Animation {
+        let previewAnimation = Animation()
+        
+        try? realm.write {
+            let frame = Frame()
+            previewAnimation.title = "Preview Animation"
+            previewAnimation.selectedFrame = frame
+            previewAnimation.frames.append(frame)
+            realm.add(previewAnimation)
+        }
+        
+        return previewAnimation
+    }
+}
+
 

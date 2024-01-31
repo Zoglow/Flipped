@@ -30,37 +30,13 @@ struct TimelineFrame: View {
             if (thisFrame == animation.selectedFrame) { addFrameButton(isToLeft: false, frame: thisFrame).zIndex(1) }
         }
         .zIndex(thisFrame == animation.selectedFrame ? 3 : 0)
-        .padding(.horizontal, thisFrame == animation.selectedFrame ? -28 : 5)
+        .padding(.horizontal, thisFrame == animation.selectedFrame ? -32 : 1)
         .contextMenu {
-            if (thisFrame == animation.selectedFrame) {
+            if (thisFrame == animation.selectedFrame) { 
                 deleteButton()
-            }
-            
-            if (thisFrame == animation.selectedFrame) {
                 duplicateButton()
             }
-            
         }
-
-        
-    }
-    
-    func addFrameButton(isToLeft: Bool, frame: Frame) -> some View {
-        return AnyView (
-            Button {
-                animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
-            } label: {
-                ZStack {
-                    Rectangle()
-                        .frame(width: 37, height: 45)
-                        .foregroundColor(.white)
-                        .shadow(radius: 5)
-                    Image(systemName: "plus")
-                        .foregroundColor(.black)
-                        .font(.headline)
-                }
-            }
-        )
     }
     
     func frameView() -> some View {
@@ -81,6 +57,24 @@ struct TimelineFrame: View {
                 .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
                 .padding(.vertical, thisFrame == animation.selectedFrame ? 10 : 0)
                 .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
+            }
+        )
+    }
+    
+    func addFrameButton(isToLeft: Bool, frame: Frame) -> some View {
+        return AnyView (
+            Button {
+                animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
+            } label: {
+                ZStack {
+                    Rectangle()
+                        .frame(width: 37, height: 45)
+                        .foregroundColor(.white)
+                        .shadow(radius: 5)
+                    Image(systemName: "plus")
+                        .foregroundColor(.black)
+                        .font(.headline)
+                }
             }
         )
     }
@@ -131,8 +125,17 @@ struct TimelineFrame: View {
 
 }
 
-//struct TimelineFrame_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TimelineFrame(thisFrame: Frame(), animation: Animation())
-//    }
-//}
+struct TimelineFrame_Previews: PreviewProvider {
+    static var previews: some View {
+        // Set up the Realm configuration for preview
+        let config = Realm.Configuration(inMemoryIdentifier: "preview")
+        let realm = try! Realm(configuration: config)
+        
+        // Set up a sample animation for preview
+        let previewAnimation = Animation.previewAnimation(in: realm)
+        
+        return AnimationView(animation: previewAnimation)
+            .environment(\.realm, realm)
+            .environment(\.realmConfiguration, config)
+    }
+}
