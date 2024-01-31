@@ -36,74 +36,10 @@ struct TimelineView: View {
             ScrollView(.horizontal) {
                 HStack() { //Frames
                     ForEach(animation.frames) { frame in
-                        
-                        if (frame == animation.selectedFrame) {
-                            HStack {
-                                if (!isPlaying) { addFrameButton(isToLeft: true, frame: frame) }
-
-                                TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
-                                    .zIndex(3)
-                                
-                                if (!isPlaying) { addFrameButton(isToLeft: false, frame: frame) }
-                                
-                            }
-                            .id(frame.id)
-                            .padding(.horizontal, -33)
-                            .zIndex(3)
-                            .contextMenu {
-                                
-                                // Delete frame
-                                Button {
-                                    let index = animation.frames.firstIndex(of: animation.selectedFrame!)
-                                    print("Currently selected index: " + index!.description)
-                                    
-                                    try! realm.write {
-                                        let thisAnimation = animation.thaw()
-                                        
-                                        
-                                        // This needs work
-                                        if (thisAnimation?.frames.count == 1) {
-                                            canvas.drawing = PKDrawing()
-                                        } else if ((index! - 1) < 0) {
-                                            thisAnimation?.selectedFrame = thisAnimation?.frames[index!+1]
-                                            canvas.drawing = try PKDrawing(data: (thisAnimation?.selectedFrame!.frameData)!)
-
-                                            thisAnimation!.frames.remove(at: index!)
-                                        } else {
-                                            thisAnimation?.selectedFrame = thisAnimation?.frames[index!-1]
-                                            canvas.drawing = try PKDrawing(data: (thisAnimation?.selectedFrame!.frameData)!)
-                                            
-                                            thisAnimation!.frames.remove(at: index!)
-                                        }
-                                    }
-                                    
-                                } label: {
-                                    Text("Delete")
-                                    Image(systemName: "x.circle.fill")
-                                }
-                                // Duplicate frame
-                                Button {
-                                    animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
-                                    animation.duplicateFrame(canvas: canvas, frame: animation.selectedFrame!)
-                                } label: {
-                                    Text("Duplicate")
-                                    Image(systemName: "plus.square.fill.on.square.fill")
-                                }
-                                
-                            }
-                            
-                        } else {
-                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
-//
-//                                .scrollTransition(axis: .horizontal) {
-//                                    content, phase in
-//                                    content.opacity(phase.isIdentity ? 1 : 0)
-//                                }
-                            
-                        }
+                        TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
                     }
                 }
-                .frame(width: 550, height: 150, alignment: .center)
+                .frame(height: 150, alignment: .center)
                 .scrollTargetLayout()
                 .padding(10)
                 
@@ -188,23 +124,74 @@ struct TimelineView: View {
         isPlaying = false
     }
     
-    func addFrameButton(isToLeft: Bool, frame: Frame) -> some View {
-        return AnyView (
-            Button {
-                animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
-            } label: {
-                ZStack {
-                    Rectangle()
-                        .frame(width: 37, height: 45)
-                        .foregroundColor(.white)
-                        .shadow(radius: 5)
-                    Image(systemName: "plus")
-                        .foregroundColor(.black)
-                        .font(.headline)
-                }
-            }
-        )
-    }
 }
 
+
+//{ frame in
+//    
+//    if (frame == animation.selectedFrame) {
+//        HStack {
+//            if (!isPlaying) { addFrameButton(isToLeft: true, frame: frame) }
+//
+//            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+//                .zIndex(3)
+//            
+//            if (!isPlaying) { addFrameButton(isToLeft: false, frame: frame) }
+//            
+//        }
+//        .id(frame.id)
+//        .padding(.horizontal, -33)
+//        .zIndex(3)
+//        .contextMenu {
+//            
+//            // Delete frame
+//            Button {
+//                let index = animation.frames.firstIndex(of: animation.selectedFrame!)
+//                print("Currently selected index: " + index!.description)
+//                
+//                try! realm.write {
+//                    let thisAnimation = animation.thaw()
+//                    
+//                    
+//                    // This needs work
+//                    if (thisAnimation?.frames.count == 1) {
+//                        canvas.drawing = PKDrawing()
+//                    } else if ((index! - 1) < 0) {
+//                        thisAnimation?.selectedFrame = thisAnimation?.frames[index!+1]
+//                        canvas.drawing = try PKDrawing(data: (thisAnimation?.selectedFrame!.frameData)!)
+//
+//                        thisAnimation!.frames.remove(at: index!)
+//                    } else {
+//                        thisAnimation?.selectedFrame = thisAnimation?.frames[index!-1]
+//                        canvas.drawing = try PKDrawing(data: (thisAnimation?.selectedFrame!.frameData)!)
+//                        
+//                        thisAnimation!.frames.remove(at: index!)
+//                    }
+//                }
+//                
+//            } label: {
+//                Text("Delete")
+//                Image(systemName: "x.circle.fill")
+//            }
+//            // Duplicate frame
+//            Button {
+//                animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
+//                animation.duplicateFrame(canvas: canvas, frame: animation.selectedFrame!)
+//            } label: {
+//                Text("Duplicate")
+//                Image(systemName: "plus.square.fill.on.square.fill")
+//            }
+//            
+//        }
+//        
+//    } else {
+//        TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+////
+////                                .scrollTransition(axis: .horizontal) {
+////                                    content, phase in
+////                                    content.opacity(phase.isIdentity ? 1 : 0)
+////                                }
+//        
+//    }
+//}
 
