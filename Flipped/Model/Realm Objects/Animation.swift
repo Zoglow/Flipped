@@ -48,6 +48,21 @@ final class Animation: Object, ObjectKeyIdentifiable {
         
     }
     
+    func loadDrawingCheap(canvas: PKCanvasView, frame: Frame) {
+            
+        let thisFrame = frame.thaw()
+        let animation = self.thaw()
+        let realm = animation?.realm
+            
+        try? realm?.write {
+            if let loadedDrawing = try? PKDrawing(data: thisFrame!.frameData) {
+                canvas.drawing = PKDrawing()
+                canvas.drawing = loadedDrawing
+            }
+        }
+        
+    }
+    
     func addFrame(isToLeft: Bool, canvas: PKCanvasView, frame: Frame) {
         
         let animation = self.thaw()

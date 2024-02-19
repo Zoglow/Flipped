@@ -14,7 +14,7 @@ struct TimelineView: View {
     @Environment(\.realm) var realm
     @Environment(\.realmConfiguration) var conf
 
-    @State var selectedFrame: Frame?
+    @State private var centerFrame: Frame?
     @State private var timer: Timer?
     
     @Binding var canvas: PKCanvasView
@@ -32,20 +32,29 @@ struct TimelineView: View {
                 .frame(width:700, height: 50)
                 .foregroundColor(.black.opacity(0.25))
             
-            ScrollView(.horizontal) {
-                HStack() { //Frames
-                    ForEach(animation.frames) { frame in
-                        TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal) {
+                    HStack() { //Frames
+                        Spacer().frame(width: 200).background(.blue)
+                        ForEach(animation.frames) { frame in
+                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+                                
+                        }
+                        Spacer().frame(width: 200).background(.blue)
+                        
                     }
+                    .frame(height: 150)
+                    .scrollTargetLayout()
+                    
                 }
-                .frame(height: 150)
-                .scrollTargetLayout()
+                .frame(width: 550, height: 150)
+//                .scrollTargetBehavior(.viewAligned)
+//                .scrollPosition(id: $centerFrame, anchor: .center)
+//                .safeAreaPadding(.horizontal, 30)
+//                .scrollClipDisabled()
+                .scrollIndicators(.hidden)
             }
-            .frame(width: 500, height: 150)
-            .safeAreaPadding(.horizontal, 30)
-            .scrollIndicators(.hidden)
-            .scrollTargetBehavior(.viewAligned)
-//            .scrollPosition(id: $selectedFrame, anchor: .center)
+//            .scrollPosition(id: $centerFrame, anchor: .center)
             
             HStack(alignment: .center) { //timeline controls
                 Button {
@@ -95,8 +104,6 @@ struct TimelineView: View {
     }
     
     func playFrame(index: Int, images: [Image], animation: Animation) {
-        
-        
         
         guard isPlaying else { return }
         

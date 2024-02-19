@@ -17,6 +17,8 @@ struct TimelineFrame: View {
     @ObservedRealmObject var thisFrame: Frame
     @ObservedRealmObject var animation: Animation
     
+    @State var isMiddleFrame: Bool = false
+    
     @Binding var canvas: PKCanvasView
     
     var body: some View {
@@ -24,8 +26,9 @@ struct TimelineFrame: View {
         HStack {
             
             if (thisFrame == animation.selectedFrame) { addFrameButton(isToLeft: true, frame: thisFrame).zIndex(1) }
-            
-            frameView().zIndex(2)
+    
+            frameView()
+                .zIndex(2)
                 
             if (thisFrame == animation.selectedFrame) { addFrameButton(isToLeft: false, frame: thisFrame).zIndex(1) }
         }
@@ -37,6 +40,26 @@ struct TimelineFrame: View {
                 duplicateButton()
             }
         }
+        
+    }
+    
+    private func checkLocation(geo: GeometryProxy) -> Bool {
+        let screenWidth = UIScreen.main.bounds.width
+        let middleOfScreen = screenWidth / 2.0
+        let loc = geo.frame(in: .global).midX
+        
+        // Define a range around the middleOfScreen
+        let range: ClosedRange<CGFloat> = (middleOfScreen - 50.5)...(middleOfScreen + 50.5)
+        
+        if (range.contains(loc)) {
+            return true
+//            if (animation.selectedFrame != thisFrame) {
+//
+////                animation.loadDrawing(canvas: canvas, frame: thisFrame)
+//            }
+        }
+
+        return false
     }
     
     func frameView() -> some View {
@@ -45,17 +68,25 @@ struct TimelineFrame: View {
                 animation.saveDrawing(canvas: canvas, frame: thisFrame)
             } label: {
                 ZStack {
-                    Rectangle()
-                        .foregroundColor(.white)
-                    Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                    
+                    GeometryReader { geo in
+                        
+                        Rectangle()
+                            .foregroundColor(.white)
+                        Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+//                        if (checkLocation(geo: geo)) {
+//                            Text("is middle")
+//                        }
+                            
+                    }
+                    
                         
                 }
                 .frame(width: 125, height: 100)
                 .shadow(radius: 5)
                 .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
-                .padding(.vertical, thisFrame == animation.selectedFrame ? 10 : 0)
                 .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
             }
         )

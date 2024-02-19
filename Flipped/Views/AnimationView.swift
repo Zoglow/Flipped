@@ -158,7 +158,7 @@ struct AnimationView: View {
         .gesture(
             MagnificationGesture()
                 .onEnded({ fingerDistance in
-                    isFocused = (fingerDistance > 1 ? true : false)
+                    isFocused = (fingerDistance > 1)
                 })
         )
         
