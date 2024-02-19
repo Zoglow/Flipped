@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 import PencilKit
+import SwiftUI
 
 final class Animation: Object, ObjectKeyIdentifiable {
     
@@ -17,6 +18,8 @@ final class Animation: Object, ObjectKeyIdentifiable {
     
     @Persisted var frames = RealmSwift.List<Frame>()
     @Persisted var selectedFrame: Frame?
+    
+//    @Persisted var thumbnails = RealmSwift.List<UIImage>()
     
     func saveDrawing(canvas: PKCanvasView, frame: Frame) {
         

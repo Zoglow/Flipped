@@ -71,17 +71,17 @@ struct TimelineFrame: View {
                     
                     GeometryReader { geo in
                         
+//                        if (checkLocation(geo: geo)) {
+//                            Text("is middle")
+//                        }
+                        
                         Rectangle()
                             .foregroundColor(.white)
                         Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-//                        if (checkLocation(geo: geo)) {
-//                            Text("is middle")
-//                        }
                             
                     }
-                    
                         
                 }
                 .frame(width: 125, height: 100)
@@ -95,7 +95,9 @@ struct TimelineFrame: View {
     func addFrameButton(isToLeft: Bool, frame: Frame) -> some View {
         return AnyView (
             Button {
-                animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
+                withAnimation() {
+                    animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
+                }
             } label: {
                 ZStack {
                     Rectangle()

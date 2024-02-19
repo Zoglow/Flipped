@@ -35,16 +35,19 @@ struct TimelineView: View {
             ScrollViewReader { proxy in
                 ScrollView(.horizontal) {
                     HStack() { //Frames
-                        Spacer().frame(width: 200).background(.blue)
+                        Spacer().frame(width: 200)
                         ForEach(animation.frames) { frame in
+                             
                             TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+                                .id(frame)
+                                
                                 
                         }
-                        Spacer().frame(width: 200).background(.blue)
+                        Spacer().frame(width: 200)
                         
                     }
                     .frame(height: 150)
-                    .scrollTargetLayout()
+//                    .scrollTargetLayout()
                     
                 }
                 .frame(width: 550, height: 150)
@@ -53,8 +56,14 @@ struct TimelineView: View {
 //                .safeAreaPadding(.horizontal, 30)
 //                .scrollClipDisabled()
                 .scrollIndicators(.hidden)
+                .onChange(of: animation.selectedFrame) {
+                    withAnimation(.easeOut) {
+                        proxy.scrollTo(animation.selectedFrame, anchor: .center)
+                    }
+                    
+                }
             }
-//            .scrollPosition(id: $centerFrame, anchor: .center)
+            .scrollPosition(id: $centerFrame, anchor: .center)
             
             HStack(alignment: .center) { //timeline controls
                 Button {

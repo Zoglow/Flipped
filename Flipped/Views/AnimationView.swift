@@ -26,10 +26,8 @@ struct AnimationView: View {
     @State private var isFocused = false
     @State private var isEditingTitle = false
     @State private var editableTitle = ""
-
     
     var body: some View {
-        
 
         ZStack(alignment: .center) {
             Color.white
