@@ -2,7 +2,7 @@
 //  Frame.swift
 //  Flipped
 //
-//  Created by Zoe Olson on 9/25/23.
+//  Created by Zoe Sosa on 9/25/23.
 //
 
 import Foundation

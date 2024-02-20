@@ -2,7 +2,7 @@
 //  TimelineFrame.swift
 //  Flipped
 //
-//  Created by Zoe Olson on 9/26/23.
+//  Created by Zoe Sosa on 9/26/23.
 //
 
 import SwiftUI
