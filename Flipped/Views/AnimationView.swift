@@ -182,18 +182,6 @@ extension PKDrawing {
     }
 }
 
-//let darkImage = thumbnail(drawing: drawing, thumbnailRect: frameForImage, traitCollection: UITraitCollection(userInterfaceStyle: .dark))
-
-//func thumbnail(drawing: PKDrawing, thumbnailRect: CGRect, traitCollection: UITraitCollection) -> UIImage {
-//
-//    var image = UIImage()
-//    traitCollection.performAsCurrent {
-//        image = drawing.image(from: thumbnailRect, scale: 2.0)
-//    }
-//    return image
-//}
-
-
 struct AnimationView_Previews: PreviewProvider {
     static var previews: some View {
         // Set up the Realm configuration for preview

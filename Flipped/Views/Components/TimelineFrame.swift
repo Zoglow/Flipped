@@ -43,6 +43,7 @@ struct TimelineFrame: View {
     
     }
     
+    // Detects if frame is close enough to the center to be considered for selection
     private func isNearCenter(geo: GeometryProxy) -> Bool {
         let screenWidth = UIScreen.main.bounds.width
         let middleOfScreen = screenWidth / 2.0
@@ -66,8 +67,10 @@ struct TimelineFrame: View {
                         
                         Rectangle()
                             .foregroundColor(.white)
+                        
+                            // Animation's selected frame changes only if there is a new frame that qualifies
                             .onChange(of: isNearCenter(geo: geo)) {
-                                if (isNearCenter(geo: geo)) {
+                                if (isNearCenter(geo: geo) && animation.selectedFrame != thisFrame) {
                                     animation.loadDrawing(canvas: canvas, frame: thisFrame)
                                 }
                             }

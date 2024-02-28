@@ -14,7 +14,6 @@ struct TimelineView: View {
     @Environment(\.realm) var realm
     @Environment(\.realmConfiguration) var conf
 
-//    @State private var centerFrame: Frame?
     @State private var timer: Timer?
     @State var middleFrame: Frame?
     
