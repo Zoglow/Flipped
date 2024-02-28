@@ -17,9 +17,8 @@ struct TimelineFrame: View {
     @ObservedRealmObject var thisFrame: Frame
     @ObservedRealmObject var animation: Animation
     
-    @State var isMiddleFrame: Bool = false
-    
     @Binding var canvas: PKCanvasView
+    @Binding var middleFrame: Frame?
     
     var body: some View {
         
@@ -29,6 +28,7 @@ struct TimelineFrame: View {
     
             frameView()
                 .zIndex(2)
+                
                 
             if (thisFrame == animation.selectedFrame) { addFrameButton(isToLeft: false, frame: thisFrame).zIndex(1) }
         }
@@ -40,26 +40,19 @@ struct TimelineFrame: View {
                 duplicateButton()
             }
         }
-        
+    
     }
     
-    private func checkLocation(geo: GeometryProxy) -> Bool {
+    private func isNearCenter(geo: GeometryProxy) -> Bool {
         let screenWidth = UIScreen.main.bounds.width
         let middleOfScreen = screenWidth / 2.0
-        let loc = geo.frame(in: .global).midX
+        
+        let xPos = geo.frame(in: .global).midX
         
         // Define a range around the middleOfScreen
-        let range: ClosedRange<CGFloat> = (middleOfScreen - 50.5)...(middleOfScreen + 50.5)
+        let range: ClosedRange<CGFloat> = (middleOfScreen - 60)...(middleOfScreen + 60)
         
-        if (range.contains(loc)) {
-            return true
-//            if (animation.selectedFrame != thisFrame) {
-//
-////                animation.loadDrawing(canvas: canvas, frame: thisFrame)
-//            }
-        }
-
-        return false
+        return range.contains(xPos)
     }
     
     func frameView() -> some View {
@@ -71,16 +64,23 @@ struct TimelineFrame: View {
                     
                     GeometryReader { geo in
                         
-//                        if (checkLocation(geo: geo)) {
-//                            Text("is middle")
-//                        }
-                        
                         Rectangle()
                             .foregroundColor(.white)
+                            .onChange(of: isNearCenter(geo: geo)) {
+                                if (isNearCenter(geo: geo)) {
+                                    animation.loadDrawing(canvas: canvas, frame: thisFrame)
+                                }
+                            }
+                            
                         Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            
+                        
+                        if (isNearCenter(geo: geo)) {
+                            Text("MIDDLE FRAME")
+                        }
+                        
+                         
                     }
                         
                 }
@@ -88,6 +88,7 @@ struct TimelineFrame: View {
                 .shadow(radius: 5)
                 .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
                 .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
+                
             }
         )
     }

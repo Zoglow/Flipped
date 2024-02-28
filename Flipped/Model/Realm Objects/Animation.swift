@@ -29,7 +29,7 @@ final class Animation: Object, ObjectKeyIdentifiable {
         
         try? realm?.write {
             animation!.selectedFrame?.frameData = canvas.drawing.dataRepresentation()
-            print("Frame data saved: " + (animation!.selectedFrame?.frameData.debugDescription ?? "No data found"))
+//            print("Frame data saved: " + (animation!.selectedFrame?.frameData.debugDescription ?? "No data found"))
         }
         
         self.loadDrawing(canvas: canvas, frame: frame)
@@ -51,20 +51,20 @@ final class Animation: Object, ObjectKeyIdentifiable {
         
     }
     
-    func loadDrawingCheap(canvas: PKCanvasView, frame: Frame) {
-            
-        let thisFrame = frame.thaw()
-        let animation = self.thaw()
-        let realm = animation?.realm
-            
-        try? realm?.write {
-            if let loadedDrawing = try? PKDrawing(data: thisFrame!.frameData) {
-                canvas.drawing = PKDrawing()
-                canvas.drawing = loadedDrawing
-            }
-        }
-        
-    }
+//    func loadDrawingCheap(canvas: PKCanvasView, frame: Frame) {
+//            
+//        let thisFrame = frame.thaw()
+//        let animation = self.thaw()
+//        let realm = animation?.realm
+//            
+//        try? realm?.write {
+//            if let loadedDrawing = try? PKDrawing(data: thisFrame!.frameData) {
+//                canvas.drawing = PKDrawing()
+//                canvas.drawing = loadedDrawing
+//            }
+//        }
+//        
+//    }
     
     func addFrame(isToLeft: Bool, canvas: PKCanvasView, frame: Frame) {
         

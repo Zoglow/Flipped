@@ -14,8 +14,9 @@ struct TimelineView: View {
     @Environment(\.realm) var realm
     @Environment(\.realmConfiguration) var conf
 
-    @State private var centerFrame: Frame?
+//    @State private var centerFrame: Frame?
     @State private var timer: Timer?
+    @State var middleFrame: Frame?
     
     @Binding var canvas: PKCanvasView
     @Binding var isPlaying: Bool
@@ -25,6 +26,7 @@ struct TimelineView: View {
     @State var onionSkinModeWasOn: Bool?
     
     @ObservedRealmObject var animation: Animation
+    
     
     var body: some View {
         ZStack {
@@ -38,16 +40,13 @@ struct TimelineView: View {
                         Spacer().frame(width: 200)
                         ForEach(animation.frames) { frame in
                              
-                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas)
+                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas, middleFrame: $middleFrame)
                                 .id(frame)
-                                
-                                
                         }
                         Spacer().frame(width: 200)
                         
                     }
                     .frame(height: 150)
-//                    .scrollTargetLayout()
                     
                 }
                 .frame(width: 550, height: 150)
@@ -55,15 +54,17 @@ struct TimelineView: View {
 //                .scrollPosition(id: $centerFrame, anchor: .center)
 //                .safeAreaPadding(.horizontal, 30)
 //                .scrollClipDisabled()
+//                .scrollTargetBehavior(.viewAligned)
                 .scrollIndicators(.hidden)
                 .onChange(of: animation.selectedFrame) {
-                    withAnimation(.easeOut) {
+                    withAnimation(.easeInOut(duration: 1.0)) {
                         proxy.scrollTo(animation.selectedFrame, anchor: .center)
                     }
-                    
                 }
+                
+                
             }
-            .scrollPosition(id: $centerFrame, anchor: .center)
+//            .scrollPosition(id: $centerFrame, anchor: .center)
             
             HStack(alignment: .center) { //timeline controls
                 Button {
@@ -115,11 +116,7 @@ struct TimelineView: View {
     func playFrame(index: Int, images: [Image], animation: Animation) {
         
         guard isPlaying else { return }
-        
-//        try! realm.write {
-//            animation.selectedFrame = animation.frames[index]
-//        }
-        
+                
         frameImage = images[index]
         
         let nextIndex = (index + 1) % images.count
