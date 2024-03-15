@@ -51,7 +51,7 @@ struct TimelineFrame: View {
         let xPos = geo.frame(in: .global).midX
         
         // Define a range around the middleOfScreen
-        let range: ClosedRange<CGFloat> = (middleOfScreen - 60)...(middleOfScreen + 60)
+        let range: ClosedRange<CGFloat> = (middleOfScreen - 50)...(middleOfScreen + 50)
         
         return range.contains(xPos)
     }
@@ -69,11 +69,11 @@ struct TimelineFrame: View {
                             .foregroundColor(.white)
                         
                             // Animation's selected frame changes only if there is a new frame that qualifies
-                            .onChange(of: isNearCenter(geo: geo)) {
-                                if (isNearCenter(geo: geo) && animation.selectedFrame != thisFrame) {
-                                    animation.loadDrawing(canvas: canvas, frame: thisFrame)
-                                }
-                            }
+//                            .onChange(of: isNearCenter(geo: geo)) {
+//                                if (isNearCenter(geo: geo) && animation.selectedFrame != thisFrame) {
+//                                    animation.loadDrawing(canvas: canvas, frame: thisFrame)
+//                                }
+//                            }
                             
                         Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
                             .resizable()

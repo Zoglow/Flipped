@@ -74,6 +74,7 @@ struct AnimationView: View {
             }
             
             CanvasView(canvas: $canvas, drawing: $drawing, animation: animation, selectedFrame: animation.selectedFrame!)
+//                .aspectRatio(1.0, contentMode: .fit)
                 .opacity(isPlaying ? 0 : 1)
                 .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
