@@ -138,13 +138,6 @@ struct AnimationView: View {
                 }
             }
             
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button {
-//                    animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame)
-//                } label: {
-//                    Image(systemName: "square.and.arrow.down")
-//                }
-//            }
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -153,6 +146,11 @@ struct AnimationView: View {
                     Image(systemName: "square.3.stack.3d.middle.fill")
                 }
             }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ShareLink(item: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) , preview: SharePreview("selected frame", image: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1))))
+            }
+            
         }
         .gesture(
             MagnificationGesture()

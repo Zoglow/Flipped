@@ -36,6 +36,7 @@
 		B00A46A52AC2039D00CF1B94 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		B00A46A72AC26AF200CF1B94 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineFrame.swift; sourceTree = "<group>"; };
+		B0373B622BA8A01300875CDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B07353612AD48D1A008B7645 /* OnionSkinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnionSkinView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +72,7 @@
 		B00A46882AC1FD1400CF1B94 /* Flipped */ = {
 			isa = PBXGroup;
 			children = (
+				B0373B622BA8A01300875CDF /* Info.plist */,
 				B01C2FEB2B4EE67600627F32 /* Views */,
 				B073535A2AD37F02008B7645 /* Model */,
 				B00A46892AC1FD1400CF1B94 /* FlippedApp.swift */,
@@ -345,7 +347,9 @@
 				DEVELOPMENT_TEAM = 4FCWZCSL9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Flipped/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) wants to use your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -379,7 +383,9 @@
 				DEVELOPMENT_TEAM = 4FCWZCSL9L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Flipped/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) wants to use your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

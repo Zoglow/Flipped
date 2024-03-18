@@ -50,6 +50,7 @@ struct CanvasView: UIViewRepresentable {
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
             // Handle drawing changes here
 //            animation.saveDrawing(canvas: canvasView, frame: selectedFrame)
+            print("drawing changed")
             
         }
     }
