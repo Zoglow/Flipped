@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		007F2AE137E423E691B1293052277C20 /* Pods-Flipped-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F58BC241BE39230039089BC9D6B5688 /* Pods-Flipped-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		116196E4A752435C1AA30636A833ED35 /* GIFFromImages-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E21095024E5DFBAC308BEEBA33019B4 /* GIFFromImages-dummy.m */; };
+		36A9B6C3134F2D4564123C71095BA7CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		665C809331B0309EBA9CAD4F8A6D1C71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8410084A47E3455AAB7843A8B3D44D29 /* GIFFromImages-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2287AE3B0A4C7E1C4D6CBC7DAC34B4 /* GIFFromImages-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B166E8C339CFE5210F1DC05A670E2882 /* Pods-Flipped-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E06BC874935FC764E9060465E13C7BC /* Pods-Flipped-dummy.m */; };
+		C7C8BA1BB9D8E867EB88A5530E0649F3 /* GIFFromImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CDC8D4C0C5C93F2A8B0F2D29AD299F /* GIFFromImages.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D41FD3F3A4EE255E6FD9471CD2190302 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF21ACF0B2DD26E6247BDA14E7FA4232;
+			remoteInfo = GIFFromImages;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08CDC8D4C0C5C93F2A8B0F2D29AD299F /* GIFFromImages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GIFFromImages.swift; path = GIFFromImages/Classes/GIFFromImages.swift; sourceTree = "<group>"; };
+		0E06BC874935FC764E9060465E13C7BC /* Pods-Flipped-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Flipped-dummy.m"; sourceTree = "<group>"; };
+		11537FD0903D60A625F7A3A207C2F4DA /* Pods-Flipped */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Flipped"; path = Pods_Flipped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		215647338DBFBB13651113F3CB222213 /* GIFFromImages-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GIFFromImages-prefix.pch"; sourceTree = "<group>"; };
+		336D0CCC8A2A3DF59AD51292216D57A4 /* GIFFromImages */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GIFFromImages; path = GIFFromImages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C2287AE3B0A4C7E1C4D6CBC7DAC34B4 /* GIFFromImages-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GIFFromImages-umbrella.h"; sourceTree = "<group>"; };
+		4E21095024E5DFBAC308BEEBA33019B4 /* GIFFromImages-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GIFFromImages-dummy.m"; sourceTree = "<group>"; };
+		4F58BC241BE39230039089BC9D6B5688 /* Pods-Flipped-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Flipped-umbrella.h"; sourceTree = "<group>"; };
+		588744604D25E85653709D0F738756D6 /* GIFFromImages.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GIFFromImages.release.xcconfig; sourceTree = "<group>"; };
+		5DC238FC090D275D3A9C15C239D7E922 /* Pods-Flipped.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Flipped.modulemap"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7E8B360D20CD6A742264378DDEBF1AFD /* Pods-Flipped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Flipped.debug.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A092303EA18152E47B58BAB4EA6B0C15 /* Pods-Flipped-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Flipped-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A3ABC5A7C3F780D05734A99EFA458392 /* Pods-Flipped-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Flipped-acknowledgements.plist"; sourceTree = "<group>"; };
+		AE47BB7B816F96B86645B6C8E6327DA9 /* Pods-Flipped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Flipped.release.xcconfig"; sourceTree = "<group>"; };
+		B35883A0C7542B559A26EA1A08FF8EA1 /* GIFFromImages.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GIFFromImages.modulemap; sourceTree = "<group>"; };
+		B389968CD59D21026C6FCDFE4F3C2F3B /* GIFFromImages-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "GIFFromImages-Info.plist"; sourceTree = "<group>"; };
+		BA6B82FD8955FC0B0C60EAC5F48C0B82 /* Pods-Flipped-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Flipped-Info.plist"; sourceTree = "<group>"; };
+		BCFDB059530323A6CF300D5266DF6F07 /* Pods-Flipped-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Flipped-frameworks.sh"; sourceTree = "<group>"; };
+		E09EA09E2B13ECD1D13246DF2511676B /* GIFFromImages.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GIFFromImages.debug.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3BFC3E37B6B958B25AF5EA9A2AE7950 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36A9B6C3134F2D4564123C71095BA7CD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4520CFC994D1B1B1B1D1B26DCF3655C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				665C809331B0309EBA9CAD4F8A6D1C71 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		393E80EC1D0C6C9992301C04A58052BC /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6BD45E721AFFE756AEB033BAED21497E /* Pods-Flipped */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		4AAC9FA1D502916BE2CE650E3366E964 /* GIFFromImages */ = {
+			isa = PBXGroup;
+			children = (
+				08CDC8D4C0C5C93F2A8B0F2D29AD299F /* GIFFromImages.swift */,
+				570D7223ABEB85153FD74860F84FE839 /* Support Files */,
+			);
+			name = GIFFromImages;
+			path = GIFFromImages;
+			sourceTree = "<group>";
+		};
+		570D7223ABEB85153FD74860F84FE839 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B35883A0C7542B559A26EA1A08FF8EA1 /* GIFFromImages.modulemap */,
+				4E21095024E5DFBAC308BEEBA33019B4 /* GIFFromImages-dummy.m */,
+				B389968CD59D21026C6FCDFE4F3C2F3B /* GIFFromImages-Info.plist */,
+				215647338DBFBB13651113F3CB222213 /* GIFFromImages-prefix.pch */,
+				4C2287AE3B0A4C7E1C4D6CBC7DAC34B4 /* GIFFromImages-umbrella.h */,
+				E09EA09E2B13ECD1D13246DF2511676B /* GIFFromImages.debug.xcconfig */,
+				588744604D25E85653709D0F738756D6 /* GIFFromImages.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GIFFromImages";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6BD45E721AFFE756AEB033BAED21497E /* Pods-Flipped */ = {
+			isa = PBXGroup;
+			children = (
+				5DC238FC090D275D3A9C15C239D7E922 /* Pods-Flipped.modulemap */,
+				A092303EA18152E47B58BAB4EA6B0C15 /* Pods-Flipped-acknowledgements.markdown */,
+				A3ABC5A7C3F780D05734A99EFA458392 /* Pods-Flipped-acknowledgements.plist */,
+				0E06BC874935FC764E9060465E13C7BC /* Pods-Flipped-dummy.m */,
+				BCFDB059530323A6CF300D5266DF6F07 /* Pods-Flipped-frameworks.sh */,
+				BA6B82FD8955FC0B0C60EAC5F48C0B82 /* Pods-Flipped-Info.plist */,
+				4F58BC241BE39230039089BC9D6B5688 /* Pods-Flipped-umbrella.h */,
+				7E8B360D20CD6A742264378DDEBF1AFD /* Pods-Flipped.debug.xcconfig */,
+				AE47BB7B816F96B86645B6C8E6327DA9 /* Pods-Flipped.release.xcconfig */,
+			);
+			name = "Pods-Flipped";
+			path = "Target Support Files/Pods-Flipped";
+			sourceTree = "<group>";
+		};
+		B57C932B7253A841B1D61DC50166D093 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4AAC9FA1D502916BE2CE650E3366E964 /* GIFFromImages */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BD67272A53B1BD0FFE17E78B14BDA096 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				336D0CCC8A2A3DF59AD51292216D57A4 /* GIFFromImages */,
+				11537FD0903D60A625F7A3A207C2F4DA /* Pods-Flipped */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				B57C932B7253A841B1D61DC50166D093 /* Pods */,
+				BD67272A53B1BD0FFE17E78B14BDA096 /* Products */,
+				393E80EC1D0C6C9992301C04A58052BC /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		30BBEC6F7F47B26D43D89486BC3319B5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8410084A47E3455AAB7843A8B3D44D29 /* GIFFromImages-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81E85D8C90CB86C4FD7D130E1BDEF0EC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007F2AE137E423E691B1293052277C20 /* Pods-Flipped-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		303B5874371BD2750BECA381DC46A5C4 /* Pods-Flipped */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57FD6A88AC4E0A0381EA9932CB263CDD /* Build configuration list for PBXNativeTarget "Pods-Flipped" */;
+			buildPhases = (
+				81E85D8C90CB86C4FD7D130E1BDEF0EC /* Headers */,
+				F969AAEBF12E7A230B9B71CAEF6704CE /* Sources */,
+				A4520CFC994D1B1B1B1D1B26DCF3655C /* Frameworks */,
+				1D6947B676FCF8BF4A9D1A77C0E2661B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B0D9000AA670BC8D6D32F674A81FAB3 /* PBXTargetDependency */,
+			);
+			name = "Pods-Flipped";
+			productName = Pods_Flipped;
+			productReference = 11537FD0903D60A625F7A3A207C2F4DA /* Pods-Flipped */;
+			productType = "com.apple.product-type.framework";
+		};
+		BF21ACF0B2DD26E6247BDA14E7FA4232 /* GIFFromImages */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 804CC07712E95630CF37EF6778CA7DDF /* Build configuration list for PBXNativeTarget "GIFFromImages" */;
+			buildPhases = (
+				30BBEC6F7F47B26D43D89486BC3319B5 /* Headers */,
+				AF65C90A343DED3B64C672B13FA53325 /* Sources */,
+				A3BFC3E37B6B958B25AF5EA9A2AE7950 /* Frameworks */,
+				3C62B0618C450AC65D8096E2AE2D3454 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GIFFromImages;
+			productName = GIFFromImages;
+			productReference = 336D0CCC8A2A3DF59AD51292216D57A4 /* GIFFromImages */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = BD67272A53B1BD0FFE17E78B14BDA096 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF21ACF0B2DD26E6247BDA14E7FA4232 /* GIFFromImages */,
+				303B5874371BD2750BECA381DC46A5C4 /* Pods-Flipped */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D6947B676FCF8BF4A9D1A77C0E2661B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C62B0618C450AC65D8096E2AE2D3454 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF65C90A343DED3B64C672B13FA53325 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7C8BA1BB9D8E867EB88A5530E0649F3 /* GIFFromImages.swift in Sources */,
+				116196E4A752435C1AA30636A833ED35 /* GIFFromImages-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F969AAEBF12E7A230B9B71CAEF6704CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B166E8C339CFE5210F1DC05A670E2882 /* Pods-Flipped-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6B0D9000AA670BC8D6D32F674A81FAB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GIFFromImages;
+			target = BF21ACF0B2DD26E6247BDA14E7FA4232 /* GIFFromImages */;
+			targetProxy = D41FD3F3A4EE255E6FD9471CD2190302 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2B5673441BA7C4FE0136CDA7EA1EB33A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE47BB7B816F96B86645B6C8E6327DA9 /* Pods-Flipped.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Flipped/Pods-Flipped-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Flipped/Pods-Flipped.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4489A3445E6372D8465EFACC66D427F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E8B360D20CD6A742264378DDEBF1AFD /* Pods-Flipped.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Flipped/Pods-Flipped-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Flipped/Pods-Flipped.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		51B0994C8ED95A06FEE043E56C145C80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E09EA09E2B13ECD1D13246DF2511676B /* GIFFromImages.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GIFFromImages/GIFFromImages-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GIFFromImages/GIFFromImages-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/GIFFromImages/GIFFromImages.modulemap";
+				PRODUCT_MODULE_NAME = GIFFromImages;
+				PRODUCT_NAME = GIFFromImages;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.4;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		68908F0923DEA1B78A772D7CFA6650BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 588744604D25E85653709D0F738756D6 /* GIFFromImages.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GIFFromImages/GIFFromImages-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GIFFromImages/GIFFromImages-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/GIFFromImages/GIFFromImages.modulemap";
+				PRODUCT_MODULE_NAME = GIFFromImages;
+				PRODUCT_NAME = GIFFromImages;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.4;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6A5C026ED62BBFE3380CD257EEFAEB20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		E873CA97BD124B21839AF13C9BE1CD18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A5C026ED62BBFE3380CD257EEFAEB20 /* Debug */,
+				E873CA97BD124B21839AF13C9BE1CD18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57FD6A88AC4E0A0381EA9932CB263CDD /* Build configuration list for PBXNativeTarget "Pods-Flipped" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4489A3445E6372D8465EFACC66D427F6 /* Debug */,
+				2B5673441BA7C4FE0136CDA7EA1EB33A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		804CC07712E95630CF37EF6778CA7DDF /* Build configuration list for PBXNativeTarget "GIFFromImages" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51B0994C8ED95A06FEE043E56C145C80 /* Debug */,
+				68908F0923DEA1B78A772D7CFA6650BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

@@ -21,6 +21,7 @@
 		B00A46A82AC26AF200CF1B94 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A46A72AC26AF200CF1B94 /* CanvasView.swift */; };
 		B00A46AA2AC3094600CF1B94 /* TimelineFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */; };
 		B07353622AD48D1A008B7645 /* OnionSkinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07353612AD48D1A008B7645 /* OnionSkinView.swift */; };
+		E826C88DE5101CD80E306DA4 /* Pods_Flipped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2A305900B777BB9CAB1B31 /* Pods_Flipped.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +37,11 @@
 		B00A46A52AC2039D00CF1B94 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		B00A46A72AC26AF200CF1B94 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineFrame.swift; sourceTree = "<group>"; };
-		B0373B622BA8A01300875CDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B0373B652BA8AE1F00875CDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B07353612AD48D1A008B7645 /* OnionSkinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnionSkinView.swift; sourceTree = "<group>"; };
+		C3C831B50B451C3216D4F411 /* Pods-Flipped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flipped.debug.xcconfig"; path = "Target Support Files/Pods-Flipped/Pods-Flipped.debug.xcconfig"; sourceTree = "<group>"; };
+		CE2A305900B777BB9CAB1B31 /* Pods_Flipped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flipped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEEFD669647B89205E583012 /* Pods-Flipped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flipped.release.xcconfig"; path = "Target Support Files/Pods-Flipped/Pods-Flipped.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			files = (
 				B00A469B2AC1FF1000CF1B94 /* RealmSwift in Frameworks */,
 				B00A46992AC1FF1000CF1B94 /* Realm in Frameworks */,
+				E826C88DE5101CD80E306DA4 /* Pods_Flipped.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +63,8 @@
 			children = (
 				B00A46882AC1FD1400CF1B94 /* Flipped */,
 				B00A46872AC1FD1400CF1B94 /* Products */,
+				E23D018C1AE46818749490AD /* Pods */,
+				DFDAFCAE505E31C5A8FF406C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,7 +79,7 @@
 		B00A46882AC1FD1400CF1B94 /* Flipped */ = {
 			isa = PBXGroup;
 			children = (
-				B0373B622BA8A01300875CDF /* Info.plist */,
+				B0373B652BA8AE1F00875CDF /* Info.plist */,
 				B01C2FEB2B4EE67600627F32 /* Views */,
 				B073535A2AD37F02008B7645 /* Model */,
 				B00A46892AC1FD1400CF1B94 /* FlippedApp.swift */,
@@ -129,6 +136,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DFDAFCAE505E31C5A8FF406C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE2A305900B777BB9CAB1B31 /* Pods_Flipped.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E23D018C1AE46818749490AD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3C831B50B451C3216D4F411 /* Pods-Flipped.debug.xcconfig */,
+				EEEFD669647B89205E583012 /* Pods-Flipped.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -136,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B00A46942AC1FD1600CF1B94 /* Build configuration list for PBXNativeTarget "Flipped" */;
 			buildPhases = (
+				688B0620D27E204A150728DF /* [CP] Check Pods Manifest.lock */,
 				B00A46822AC1FD1400CF1B94 /* Sources */,
 				B00A46832AC1FD1400CF1B94 /* Frameworks */,
 				B00A46842AC1FD1400CF1B94 /* Resources */,
+				830BAC8327D28848CE56C521 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,6 +227,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		688B0620D27E204A150728DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Flipped-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		830BAC8327D28848CE56C521 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flipped/Pods-Flipped-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flipped/Pods-Flipped-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flipped/Pods-Flipped-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B00A46822AC1FD1400CF1B94 /* Sources */ = {
@@ -338,13 +407,14 @@
 		};
 		B00A46952AC1FD1600CF1B94 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3C831B50B451C3216D4F411 /* Pods-Flipped.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Flipped/Preview Content\"";
-				DEVELOPMENT_TEAM = 4FCWZCSL9L;
+				DEVELOPMENT_TEAM = D9QQ44JT46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flipped/Info.plist;
@@ -374,13 +444,14 @@
 		};
 		B00A46962AC1FD1600CF1B94 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEEFD669647B89205E583012 /* Pods-Flipped.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Flipped/Preview Content\"";
-				DEVELOPMENT_TEAM = 4FCWZCSL9L;
+				DEVELOPMENT_TEAM = D9QQ44JT46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flipped/Info.plist;

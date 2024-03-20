@@ -134,20 +134,20 @@ struct TimelineView: View {
     
 }
 
-struct TimelineView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Set up the Realm configuration for preview
-        let config = Realm.Configuration(inMemoryIdentifier: "preview")
-        let realm = try! Realm(configuration: config)
-        
-        // Set up a sample animation for preview
-        let previewAnimation = Animation.previewAnimation(in: realm)
-        
-        return AnimationView(animation: previewAnimation)
-            .environment(\.realm, realm)
-            .environment(\.realmConfiguration, config)
-    }
-}
+//struct TimelineView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Set up the Realm configuration for preview
+//        let config = Realm.Configuration(inMemoryIdentifier: "preview")
+//        let realm = try! Realm(configuration: config)
+//        
+//        // Set up a sample animation for preview
+//        let previewAnimation = Animation.previewAnimation(in: realm)
+//        
+//        return AnimationView(animation: previewAnimation)
+//            .environment(\.realm, realm)
+//            .environment(\.realmConfiguration, config)
+//    }
+//}
 
 
 //{ frame in

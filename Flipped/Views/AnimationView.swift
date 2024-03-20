@@ -8,6 +8,11 @@
 import SwiftUI
 import PencilKit
 import RealmSwift
+import Foundation
+import UIKit
+import ImageIO
+import MobileCoreServices
+import UniformTypeIdentifiers
 
 struct AnimationView: View {
     
@@ -26,6 +31,7 @@ struct AnimationView: View {
     @State private var isFocused = false
     @State private var isEditingTitle = false
     @State private var editableTitle = ""
+//    @State var gif: CFString
     
     var body: some View {
 
@@ -79,6 +85,26 @@ struct AnimationView: View {
                 .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .ignoresSafeArea()
+            
+            Button {
+                
+                var images: [UIImage] = []
+                
+                for frame in animation.frames {
+                    let image = try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1)
+                    images.append(image)
+                }
+                
+                print(images.count)
+                
+                
+                
+                
+                
+            } label: {
+                Text("make gif")
+            }
+
             
             if (!isFocused) {
                 VStack {
@@ -147,8 +173,22 @@ struct AnimationView: View {
                 }
             }
             
+            // UIImage.animatedGif(from: images)
+            
+            /*
+             
+             .onTapGesture {
+                 ForEach(animation.frames) { frame in
+                     let image = try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1)
+                     images.append(image)
+                 }
+             }
+             
+             */
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 ShareLink(item: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) , preview: SharePreview("selected frame", image: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1))))
+                    
             }
             
         }
@@ -161,6 +201,36 @@ struct AnimationView: View {
         
     } // End of View
     
+}
+
+
+
+extension UIImage {
+    
+    
+    
+        
+//        let fileProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]  as CFDictionary
+//        let frameProperties: CFDictionary = [kCGImagePropertyGIFDictionary as String: [(kCGImagePropertyGIFDelayTime as String): 1.0]] as CFDictionary
+//        
+//        let documentsDirectoryURL: URL? = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+//        let fileURL: URL? = documentsDirectoryURL?.appendingPathComponent("animated.gif")
+//        
+//        if let url = fileURL as CFURL? {
+//            if let destination = CGImageDestinationCreateWithURL(url, UTType.gif, images.count, nil) {
+//                CGImageDestinationSetProperties(destination, fileProperties)
+//                for image in images {
+//                    if let cgImage = image.cgImage {
+//                        CGImageDestinationAddImage(destination, cgImage, frameProperties)
+//                    }
+//                }
+//                if !CGImageDestinationFinalize(destination) {
+//                    print("Failed to finalize the image destination")
+//                }
+//                print("Url = \(String(describing: fileURL))")
+//            }
+//        }
+
 }
 
 extension PKDrawing {
@@ -181,18 +251,18 @@ extension PKDrawing {
     }
 }
 
-struct AnimationView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Set up the Realm configuration for preview
-        let config = Realm.Configuration(inMemoryIdentifier: "preview")
-        let realm = try! Realm(configuration: config)
-        
-        // Set up a sample animation for preview
-        let previewAnimation = Animation.previewAnimation(in: realm)
-        
-        return AnimationView(animation: previewAnimation)
-            .environment(\.realm, realm)
-            .environment(\.realmConfiguration, config)
-    }
-}
+//struct AnimationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Set up the Realm configuration for preview
+//        let config = Realm.Configuration(inMemoryIdentifier: "preview")
+//        let realm = try! Realm(configuration: config)
+//        
+//        // Set up a sample animation for preview
+//        let previewAnimation = Animation.previewAnimation(in: realm)
+//        
+//        return AnimationView(animation: previewAnimation)
+//            .environment(\.realm, realm)
+//            .environment(\.realmConfiguration, config)
+//    }
+//}
 

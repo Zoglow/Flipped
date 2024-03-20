@@ -1,0 +1,6 @@
+framework module Pods_Flipped {
+  umbrella header "Pods-Flipped-umbrella.h"
+
+  export *
+  module * { export * }
+}
