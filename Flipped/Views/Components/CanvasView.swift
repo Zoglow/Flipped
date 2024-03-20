@@ -25,7 +25,7 @@ struct CanvasView: UIViewRepresentable {
         
         canvasView.delegate = context.coordinator
         canvasView.drawingPolicy = .anyInput
-        canvasView.tool = PKInkingTool(.pen, color: .black, width: 15)
+        canvasView.tool = PKInkingTool(.pen, color: .red, width: 15)
         canvasView.isOpaque = false
         canvasView.drawing = drawing
         

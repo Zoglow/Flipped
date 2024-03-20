@@ -10,7 +10,7 @@ public class GIFFromImages {
 }
 
 extension GIFFromImages {
-    func makeFileURL(filename: String) -> URL {
+    public func makeFileURL(filename: String) -> URL {
         let gifDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let gifFileURL = gifDirectory.appendingPathComponent(filename)
         return gifFileURL
@@ -21,18 +21,28 @@ extension GIFFromImages {
         var tempImages: [UIImage] = []
         for image in images {
             gifGroup.enter()
-            let imageWidth = 500
-            let imageHeight = 500
-            var imageColorSpace: CGColorSpace
-            if colorSpace == .rgb {
-                imageColorSpace = CGColorSpaceCreateDeviceRGB()
-            } else {
-                imageColorSpace = CGColorSpaceCreateDeviceGray()
-            }
-            let imageRect: CGRect = CGRect(x:0, y:0, width:imageWidth, height: imageHeight)
+            let imageWidth = UIScreen.main.bounds.width
+            let imageHeight = UIScreen.main.bounds.height
+            
+//            var imageColorSpace: CGColorSpace
+//            if colorSpace == .rgb {
+//                imageColorSpace = CGColorSpaceCreateDeviceRGB()
+//            } else {
+//                imageColorSpace = CGColorSpaceCreateDeviceGray()
+//            }
+            
+            let imageRect: CGRect = CGRect(x:0, y:0, width: imageWidth, height: imageHeight)
             let imageBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
-            let context = CGContext(data: nil, width: imageWidth, height: imageHeight, bitsPerComponent: 8, bytesPerRow: 0, space: imageColorSpace, bitmapInfo: imageBitmapInfo.rawValue)
+            let context = CGContext(data: nil, width: Int(imageWidth), height: Int(imageHeight), bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpaceCreateDeviceGray(), bitmapInfo: imageBitmapInfo.rawValue)
+            
+            
+            
             if let cgImg = image.cgImage {
+                
+                //Set bg as white
+                context?.setFillColor(UIColor.white.cgColor)
+                context?.fill(imageRect)
+                
                 context?.draw(cgImg, in: imageRect)
                 if let makeImg = context?.makeImage() {
                     let imageRef = makeImg

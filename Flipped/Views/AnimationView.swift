@@ -9,10 +9,15 @@ import SwiftUI
 import PencilKit
 import RealmSwift
 import Foundation
+
 import UIKit
-import ImageIO
-import MobileCoreServices
-import UniformTypeIdentifiers
+import GIFFromImages
+import Photos
+
+//import UIKit
+//import ImageIO
+//import MobileCoreServices
+//import UniformTypeIdentifiers
 
 struct AnimationView: View {
     
@@ -32,6 +37,8 @@ struct AnimationView: View {
     @State private var isEditingTitle = false
     @State private var editableTitle = ""
 //    @State var gif: CFString
+    
+    var gifManager = GIFFromImages()
     
     var body: some View {
 
@@ -85,25 +92,6 @@ struct AnimationView: View {
                 .onAppear(perform: { animation.loadDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .onDisappear(perform: { animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!) })
                 .ignoresSafeArea()
-            
-            Button {
-                
-                var images: [UIImage] = []
-                
-                for frame in animation.frames {
-                    let image = try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1)
-                    images.append(image)
-                }
-                
-                print(images.count)
-                
-                
-                
-                
-                
-            } label: {
-                Text("make gif")
-            }
 
             
             if (!isFocused) {
@@ -187,7 +175,56 @@ struct AnimationView: View {
              */
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                ShareLink(item: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) , preview: SharePreview("selected frame", image: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1))))
+                
+                
+                Button {
+                    var images: [UIImage] = []
+                    for frame in animation.frames {
+                        let image = try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1)
+                        images.append(image)
+                    }
+
+                    let gifURL = gifManager.makeFileURL(filename: "example.gif")
+                    gifManager.generateGifFromImages(images: images, fileURL: gifURL, colorSpace: .rgb, delayTime: 0.1, loopCount: 0)
+                    
+                    // Check if the GIF file exists
+                    if FileManager.default.fileExists(atPath: gifURL.path) {
+                        print("GIF was generated successfully.")
+                    } else {
+                        print("Failed to generate GIF.")
+                    }
+                    
+                    // Save the generated GIF to the Photos library
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: gifURL)
+                    }) { success, error in
+                        if success {
+                            print("GIF saved successfully.")
+                        } else {
+                            print("Error saving GIF:", error ?? "Unknown error")
+                        }
+                    }
+                    
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+
+                
+//                ShareLink(item: gifURL, preview: SharePreview("GIF", image: Image(systemName: "photo"))) {
+//                    // Generate and save the GIF here
+//                    var images: [UIImage] = []
+//                    for frame in animation.frames {
+//                        let image = try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1)
+//                        images.append(image)
+//                    }
+//                    
+//                    gifURL = gifManager.makeFileURL(filename: "example.gif")
+//                    gifManager.generateGifFromImages(images: images, fileURL: gifURL, colorSpace: .rgb, delayTime: 1.0, loopCount: 0)
+//                }
+
+                
+                
+//                ShareLink(item: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1)) , preview: SharePreview("selected frame", image: Image(uiImage: try! PKDrawing(data: animation.selectedFrame!.frameData).generateThumbnail(scale: 1))))
                     
             }
             
