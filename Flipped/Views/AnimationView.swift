@@ -37,8 +37,7 @@ struct AnimationView: View {
     @State private var isEditingTitle = false
     @State private var editableTitle = ""
 //    @State var gif: CFString
-    
-    var gifManager = GIFFromImages()
+    @State var showSavePopup = false
     
     var body: some View {
 
@@ -94,7 +93,7 @@ struct AnimationView: View {
                 .ignoresSafeArea()
 
             
-            if (!isFocused) {
+            if !isFocused {
                 VStack {
                     Spacer()
                     TimelineView(canvas: $canvas, isPlaying: $isPlaying, frameImage: $frameImage, onionSkinModeIsOn: $onionSkinModeIsOn, animation: animation).scaleEffect(scaleEffect)
@@ -107,7 +106,12 @@ struct AnimationView: View {
                 .ignoresSafeArea()
             }
             
+            if showSavePopup {
+                SaveAnimationPopup(animation: animation, showSavePopup: $showSavePopup)
+            }
+            
         }
+        
         .toolbar {
             
             ToolbarItem(placement: .principal) {
@@ -178,31 +182,8 @@ struct AnimationView: View {
                 
                 
                 Button {
-                    var images: [UIImage] = []
-                    for frame in animation.frames {
-                        let image = try! PKDrawing(data: frame.frameData).generateThumbnail(scale: 1)
-                        images.append(image)
-                    }
-
-                    let gifURL = gifManager.makeFileURL(filename: "example.gif")
-                    gifManager.generateGifFromImages(images: images, fileURL: gifURL, colorSpace: .rgb, delayTime: 0.1, loopCount: 0)
-                    
-                    // Check if the GIF file exists
-                    if FileManager.default.fileExists(atPath: gifURL.path) {
-                        print("GIF was generated successfully.")
-                    } else {
-                        print("Failed to generate GIF.")
-                    }
-                    
-                    // Save the generated GIF to the Photos library
-                    PHPhotoLibrary.shared().performChanges({
-                        PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: gifURL)
-                    }) { success, error in
-                        if success {
-                            print("GIF saved successfully.")
-                        } else {
-                            print("Error saving GIF:", error ?? "Unknown error")
-                        }
+                    withAnimation(.easeInOut) {
+                        showSavePopup = true
                     }
                     
                 } label: {
@@ -288,18 +269,18 @@ extension PKDrawing {
     }
 }
 
-//struct AnimationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Set up the Realm configuration for preview
-//        let config = Realm.Configuration(inMemoryIdentifier: "preview")
-//        let realm = try! Realm(configuration: config)
-//        
-//        // Set up a sample animation for preview
-//        let previewAnimation = Animation.previewAnimation(in: realm)
-//        
-//        return AnimationView(animation: previewAnimation)
-//            .environment(\.realm, realm)
-//            .environment(\.realmConfiguration, config)
-//    }
-//}
+struct AnimationView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Set up the Realm configuration for preview
+        let config = Realm.Configuration(inMemoryIdentifier: "preview")
+        let realm = try! Realm(configuration: config)
+        
+        // Set up a sample animation for preview
+        let previewAnimation = Animation.previewAnimation(in: realm)
+        
+        return AnimationView(animation: previewAnimation)
+            .environment(\.realm, realm)
+            .environment(\.realmConfiguration, config)
+    }
+}
 
