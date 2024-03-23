@@ -12,12 +12,8 @@ struct TimelineSettingsPopup: View {
     @Binding var onionSkinModeIsOn: Bool
     @Binding var framesPerSecond: Int
     
-
-    
     var body: some View {
         
-        
-            
         VStack {
             Stepper("\(framesPerSecond) frames/second", value: $framesPerSecond)
                 .padding()
