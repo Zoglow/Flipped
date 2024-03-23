@@ -38,7 +38,7 @@ struct SaveAnimationPopup: View {
                     }
 
                     let gifURL = gifManager.makeFileURL(filename: "example.gif")
-                    gifManager.generateGifFromImages(images: images, fileURL: gifURL, colorSpace: .rgb, delayTime: 0.1, loopCount: 0)
+                    gifManager.generateGifFromImages(images: images, fileURL: gifURL, colorSpace: .rgb, delayTime: (1.0/Double(animation.framesPerSecond)), loopCount: 0)
                     
                     // Check if the GIF file exists
                     if FileManager.default.fileExists(atPath: gifURL.path) {

@@ -96,7 +96,7 @@ struct AnimationView: View {
             if !isFocused {
                 VStack {
                     Spacer()
-                    TimelineView(canvas: $canvas, isPlaying: $isPlaying, frameImage: $frameImage, onionSkinModeIsOn: $onionSkinModeIsOn, animation: animation).scaleEffect(scaleEffect)
+                    TimelineView(framesPerSecond: animation.framesPerSecond, canvas: $canvas, isPlaying: $isPlaying, frameImage: $frameImage, onionSkinModeIsOn: $onionSkinModeIsOn, animation: animation).scaleEffect(scaleEffect)
                 }
                 HStack {
                     ToolbarView(canvas: $canvas).scaleEffect(scaleEffect)

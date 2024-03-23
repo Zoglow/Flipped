@@ -18,6 +18,7 @@ final class Animation: Object, ObjectKeyIdentifiable {
     
     @Persisted var frames = RealmSwift.List<Frame>()
     @Persisted var selectedFrame: Frame?
+    @Persisted var framesPerSecond: Int = 15
     
 //    @Persisted var thumbnails = RealmSwift.List<UIImage>()
     

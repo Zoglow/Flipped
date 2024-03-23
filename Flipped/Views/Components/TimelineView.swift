@@ -16,13 +16,16 @@ struct TimelineView: View {
 
     @State private var timer: Timer?
     @State var middleFrame: Frame?
+    @State var framesPerSecond: Int
     
     @Binding var canvas: PKCanvasView
     @Binding var isPlaying: Bool
     @Binding var frameImage: Image
     @Binding var onionSkinModeIsOn: Bool
     
+    // Stores user setting when animation is being played
     @State var onionSkinModeWasOn: Bool?
+    @State var isTimelineMenuPresented: Bool = false
     
     @ObservedRealmObject var animation: Animation
     
@@ -76,7 +79,28 @@ struct TimelineView: View {
                 }
             
                 Spacer()
-                Image(systemName: "gear")
+                
+                Button {
+                    isTimelineMenuPresented.toggle()
+                } label: {
+                    Image(systemName: "gear")
+                }
+                .popover(isPresented: $isTimelineMenuPresented) {
+                    TimelineSettingsPopup(onionSkinModeIsOn: $onionSkinModeIsOn, framesPerSecond: $framesPerSecond)
+                        .frame(minWidth: 400)
+                        .onDisappear {
+                            try! realm.write {
+                                
+                                print(animation.framesPerSecond.description)
+                                
+                                let myAnimation = animation.thaw()
+                                myAnimation?.framesPerSecond = framesPerSecond
+                                
+                                print(animation.framesPerSecond.description)
+                            }
+                        }
+                }
+                
             }
             .font(.title)
             .foregroundColor(.black)
@@ -121,7 +145,7 @@ struct TimelineView: View {
         let nextIndex = (index + 1) % images.count
         
         // Delay between frames (adjust as needed)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + (1.0/Double(framesPerSecond))) {
             playFrame(index: nextIndex, images: images, animation: animation)
         }
     }
@@ -134,20 +158,20 @@ struct TimelineView: View {
     
 }
 
-//struct TimelineView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Set up the Realm configuration for preview
-//        let config = Realm.Configuration(inMemoryIdentifier: "preview")
-//        let realm = try! Realm(configuration: config)
-//        
-//        // Set up a sample animation for preview
-//        let previewAnimation = Animation.previewAnimation(in: realm)
-//        
-//        return AnimationView(animation: previewAnimation)
-//            .environment(\.realm, realm)
-//            .environment(\.realmConfiguration, config)
-//    }
-//}
+struct TimelineView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Set up the Realm configuration for preview
+        let config = Realm.Configuration(inMemoryIdentifier: "preview")
+        let realm = try! Realm(configuration: config)
+        
+        // Set up a sample animation for preview
+        let previewAnimation = Animation.previewAnimation(in: realm)
+        
+        return AnimationView(animation: previewAnimation)
+            .environment(\.realm, realm)
+            .environment(\.realmConfiguration, config)
+    }
+}
 
 
 //{ frame in

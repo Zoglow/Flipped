@@ -22,6 +22,7 @@
 		B00A46AA2AC3094600CF1B94 /* TimelineFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */; };
 		B07353622AD48D1A008B7645 /* OnionSkinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07353612AD48D1A008B7645 /* OnionSkinView.swift */; };
 		B09A783D2BAC6BD30005A1CA /* SaveAnimationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09A783C2BAC6BD30005A1CA /* SaveAnimationPopup.swift */; };
+		B09A783F2BACB2860005A1CA /* TimelineSettingsPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09A783E2BACB2860005A1CA /* TimelineSettingsPopup.swift */; };
 		E826C88DE5101CD80E306DA4 /* Pods_Flipped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2A305900B777BB9CAB1B31 /* Pods_Flipped.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		B0373B652BA8AE1F00875CDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B07353612AD48D1A008B7645 /* OnionSkinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnionSkinView.swift; sourceTree = "<group>"; };
 		B09A783C2BAC6BD30005A1CA /* SaveAnimationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAnimationPopup.swift; sourceTree = "<group>"; };
+		B09A783E2BACB2860005A1CA /* TimelineSettingsPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSettingsPopup.swift; sourceTree = "<group>"; };
 		C3C831B50B451C3216D4F411 /* Pods-Flipped.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flipped.debug.xcconfig"; path = "Target Support Files/Pods-Flipped/Pods-Flipped.debug.xcconfig"; sourceTree = "<group>"; };
 		CE2A305900B777BB9CAB1B31 /* Pods_Flipped.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flipped.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEEFD669647B89205E583012 /* Pods-Flipped.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flipped.release.xcconfig"; path = "Target Support Files/Pods-Flipped/Pods-Flipped.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				B00A46A52AC2039D00CF1B94 /* TimelineView.swift */,
+				B09A783E2BACB2860005A1CA /* TimelineSettingsPopup.swift */,
 				B00A46A92AC3094600CF1B94 /* TimelineFrame.swift */,
 				B00A46A32AC202F000CF1B94 /* ToolbarView.swift */,
 				B00A46A72AC26AF200CF1B94 /* CanvasView.swift */,
@@ -279,6 +282,7 @@
 			files = (
 				B00A468C2AC1FD1400CF1B94 /* ContentView.swift in Sources */,
 				B00A46AA2AC3094600CF1B94 /* TimelineFrame.swift in Sources */,
+				B09A783F2BACB2860005A1CA /* TimelineSettingsPopup.swift in Sources */,
 				B00A46A62AC2039D00CF1B94 /* TimelineView.swift in Sources */,
 				B00A46A82AC26AF200CF1B94 /* CanvasView.swift in Sources */,
 				B00A46A22AC2026400CF1B94 /* AnimationView.swift in Sources */,
