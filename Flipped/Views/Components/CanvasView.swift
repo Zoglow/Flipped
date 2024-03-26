@@ -18,7 +18,7 @@ struct CanvasView: UIViewRepresentable {
     @Binding var drawing: PKDrawing
     
     @ObservedRealmObject var animation: Animation
-    @ObservedRealmObject var selectedFrame: Frame
+    @ObservedRealmObject var currFrame: Frame
     
     func makeUIView(context: Context) -> PKCanvasView {
         let canvasView = canvas
@@ -33,23 +33,23 @@ struct CanvasView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(canvasView: self, animation: self.animation, selectedFrame: self.selectedFrame)
+        return Coordinator(canvasView: self, animation: self.animation, currFrame: self.currFrame)
     }
     
     class Coordinator: NSObject, PKCanvasViewDelegate {
         var canvasView: CanvasView
         var animation: Animation
-        var selectedFrame: Frame
+        var currFrame: Frame
         
-        init(canvasView: CanvasView, animation: Animation, selectedFrame: Frame) {
+        init(canvasView: CanvasView, animation: Animation, currFrame: Frame) {
             self.canvasView = canvasView
             self.animation = animation
-            self.selectedFrame = selectedFrame
+            self.currFrame = currFrame
         }
         
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
             // Handle drawing changes here
-//            animation.saveDrawing(canvas: canvasView, frame: selectedFrame)
+//            animation.saveDrawing(canvas: canvasView, frame: currFrame)
             print("drawing changed")
             
         }

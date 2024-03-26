@@ -23,6 +23,7 @@
 		B07353622AD48D1A008B7645 /* OnionSkinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07353612AD48D1A008B7645 /* OnionSkinView.swift */; };
 		B09A783D2BAC6BD30005A1CA /* SaveAnimationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09A783C2BAC6BD30005A1CA /* SaveAnimationPopup.swift */; };
 		B09A783F2BACB2860005A1CA /* TimelineSettingsPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09A783E2BACB2860005A1CA /* TimelineSettingsPopup.swift */; };
+		B09E69752BB34444004A2D0C /* IsScrolling in Frameworks */ = {isa = PBXBuildFile; productRef = B09E69742BB34444004A2D0C /* IsScrolling */; };
 		E826C88DE5101CD80E306DA4 /* Pods_Flipped.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2A305900B777BB9CAB1B31 /* Pods_Flipped.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B09E69752BB34444004A2D0C /* IsScrolling in Frameworks */,
 				B00A469B2AC1FF1000CF1B94 /* RealmSwift in Frameworks */,
 				B00A46992AC1FF1000CF1B94 /* Realm in Frameworks */,
 				E826C88DE5101CD80E306DA4 /* Pods_Flipped.framework in Frameworks */,
@@ -180,6 +182,7 @@
 			packageProductDependencies = (
 				B00A46982AC1FF1000CF1B94 /* Realm */,
 				B00A469A2AC1FF1000CF1B94 /* RealmSwift */,
+				B09E69742BB34444004A2D0C /* IsScrolling */,
 			);
 			productName = Flipped;
 			productReference = B00A46862AC1FD1400CF1B94 /* Flipped.app */;
@@ -211,6 +214,7 @@
 			mainGroup = B00A467D2AC1FD1400CF1B94;
 			packageReferences = (
 				B00A46972AC1FF1000CF1B94 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				B09E69732BB34444004A2D0C /* XCRemoteSwiftPackageReference "IsScrolling" */,
 			);
 			productRefGroup = B00A46872AC1FD1400CF1B94 /* Products */;
 			projectDirPath = "";
@@ -518,6 +522,14 @@
 				kind = branch;
 			};
 		};
+		B09E69732BB34444004A2D0C /* XCRemoteSwiftPackageReference "IsScrolling" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fatbobman/IsScrolling.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -530,6 +542,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B00A46972AC1FF1000CF1B94 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		B09E69742BB34444004A2D0C /* IsScrolling */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B09E69732BB34444004A2D0C /* XCRemoteSwiftPackageReference "IsScrolling" */;
+			productName = IsScrolling;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

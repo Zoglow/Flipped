@@ -18,24 +18,24 @@ struct TimelineFrame: View {
     @ObservedRealmObject var animation: Animation
     
     @Binding var canvas: PKCanvasView
-    @Binding var middleFrame: Frame?
+    @Binding var currFrame: Frame
+    @Binding var isScrolling: Bool
     
     var body: some View {
         
         HStack {
             
-            if (thisFrame == animation.selectedFrame) { addFrameButton(isToLeft: true, frame: thisFrame).zIndex(1) }
+            if (thisFrame == currFrame) { addFrameButton(isToLeft: true, frame: thisFrame).zIndex(2) }
     
             frameView()
-                .zIndex(2)
+                .zIndex(3)
                 
-                
-            if (thisFrame == animation.selectedFrame) { addFrameButton(isToLeft: false, frame: thisFrame).zIndex(1) }
+            if (thisFrame == currFrame) { addFrameButton(isToLeft: false, frame: thisFrame).zIndex(2) }
         }
-        .zIndex(thisFrame == animation.selectedFrame ? 3 : 0)
-        .padding(.horizontal, thisFrame == animation.selectedFrame ? -32 : 1)
+        .zIndex(thisFrame == currFrame ? 3 : 0)
+        .padding(.horizontal, thisFrame == currFrame ? -32 : 1)
         .contextMenu {
-            if (thisFrame == animation.selectedFrame) { 
+            if (thisFrame == currFrame) {
                 deleteButton()
                 duplicateButton()
             }
@@ -51,7 +51,7 @@ struct TimelineFrame: View {
         let xPos = geo.frame(in: .global).midX
         
         // Define a range around the middleOfScreen
-        let range: ClosedRange<CGFloat> = (middleOfScreen - 50)...(middleOfScreen + 50)
+        let range: ClosedRange<CGFloat> = (middleOfScreen - 75)...(middleOfScreen + 75)
         
         return range.contains(xPos)
     }
@@ -69,19 +69,30 @@ struct TimelineFrame: View {
                             .foregroundColor(.white)
                         
                             // Animation's selected frame changes only if there is a new frame that qualifies
-//                            .onChange(of: isNearCenter(geo: geo)) {
-//                                if (isNearCenter(geo: geo) && animation.selectedFrame != thisFrame) {
+                            .onChange(of: isNearCenter(geo: geo)) {
+                                if (isNearCenter(geo: geo) && currFrame != thisFrame && isScrolling) {
 //                                    animation.loadDrawing(canvas: canvas, frame: thisFrame)
-//                                }
-//                            }
+                                    currFrame = thisFrame
+                                    canvas.drawing = PKDrawing()
+                                    canvas.drawing = try! PKDrawing(data: currFrame.frameData)
+                                    
+                                }
+                            }
                             
                         Image(uiImage: try! PKDrawing(data: thisFrame.frameData).generateThumbnail(scale: 1)) // Use the generated thumbnail
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                         
-                        if (isNearCenter(geo: geo)) {
-                            Text("MIDDLE FRAME")
-                        }
+//                        VStack {
+//                            if (thisFrame == animation.selectedFrame) {
+//                                Text("selected frame")
+//                            }
+//                            if (thisFrame == currFrame) {
+//                                Text("curr frame")
+//                            }
+//                        }
+//                        
+                        
                         
                          
                     }
@@ -89,8 +100,8 @@ struct TimelineFrame: View {
                 }
                 .frame(width: 125, height: 100)
                 .shadow(radius: 5)
-                .scaleEffect(thisFrame == animation.selectedFrame ? 1.3 : 1)
-                .padding(.horizontal, thisFrame == animation.selectedFrame ? 7 : 0)
+                .scaleEffect(thisFrame == currFrame ? 1.3 : 1)
+                .padding(.horizontal, thisFrame == currFrame ? 7 : 0)
                 
             }
         )
@@ -102,6 +113,8 @@ struct TimelineFrame: View {
                 withAnimation() {
                     animation.addFrame(isToLeft: isToLeft, canvas: canvas, frame: frame)
                 }
+                
+                currFrame = animation.selectedFrame!
             } label: {
                 ZStack {
                     Rectangle()
@@ -119,7 +132,7 @@ struct TimelineFrame: View {
     func deleteButton() -> some View {
         return AnyView (
             Button {
-                let index = animation.frames.firstIndex(of: animation.selectedFrame!)
+                let index = animation.frames.firstIndex(of: currFrame)
                 print("Currently selected index: " + index!.description)
 
                 try! realm.write {
@@ -140,6 +153,8 @@ struct TimelineFrame: View {
 
                         thisAnimation!.frames.remove(at: index!)
                     }
+                    
+                    currFrame = (thisAnimation?.selectedFrame)!
                 }
             } label: {
                 Text("Delete")
@@ -151,8 +166,8 @@ struct TimelineFrame: View {
     func duplicateButton() -> some View {
         return AnyView (
             Button {
-                animation.saveDrawing(canvas: canvas, frame: animation.selectedFrame!)
-                animation.duplicateFrame(canvas: canvas, frame: animation.selectedFrame!)
+                animation.saveDrawing(canvas: canvas, frame: currFrame)
+                animation.duplicateFrame(canvas: canvas, frame: currFrame)
             } label: {
                 Text("Duplicate")
                 Image(systemName: "plus.square.fill.on.square.fill")
@@ -162,17 +177,17 @@ struct TimelineFrame: View {
 
 }
 
-struct TimelineFrame_Previews: PreviewProvider {
-    static var previews: some View {
-        // Set up the Realm configuration for preview
-        let config = Realm.Configuration(inMemoryIdentifier: "preview")
-        let realm = try! Realm(configuration: config)
-        
-        // Set up a sample animation for preview
-        let previewAnimation = Animation.previewAnimation(in: realm)
-        
-        return AnimationView(animation: previewAnimation)
-            .environment(\.realm, realm)
-            .environment(\.realmConfiguration, config)
-    }
-}
+//struct TimelineFrame_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // Set up the Realm configuration for preview
+//        let config = Realm.Configuration(inMemoryIdentifier: "preview")
+//        let realm = try! Realm(configuration: config)
+//        
+//        // Set up a sample animation for preview
+//        let previewAnimation = Animation.previewAnimation(in: realm)
+//        
+//        return AnimationView(animation: previewAnimation, currFrame: previewAnimation.selectedFrame!)
+//            .environment(\.realm, realm)
+//            .environment(\.realmConfiguration, config)
+//    }
+//}

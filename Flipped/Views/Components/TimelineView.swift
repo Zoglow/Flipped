@@ -8,6 +8,7 @@
 import SwiftUI
 import PencilKit
 import RealmSwift
+import IsScrolling
 
 struct TimelineView: View {
     
@@ -15,17 +16,18 @@ struct TimelineView: View {
     @Environment(\.realmConfiguration) var conf
 
     @State private var timer: Timer?
-    @State var middleFrame: Frame?
     @State var framesPerSecond: Int
     
     @Binding var canvas: PKCanvasView
     @Binding var isPlaying: Bool
+    @Binding var currFrame: Frame
     @Binding var frameImage: Image
     @Binding var onionSkinModeIsOn: Bool
     
     // Stores user setting when animation is being played
     @State var onionSkinModeWasOn: Bool?
     @State var isTimelineMenuPresented: Bool = false
+    @State var isScrolling = false
     
     @ObservedRealmObject var animation: Animation
     
@@ -41,9 +43,10 @@ struct TimelineView: View {
                     HStack() { //Frames
                         Spacer().frame(width: 200)
                         ForEach(animation.frames) { frame in
-                             
-                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas, middleFrame: $middleFrame)
+                            
+                            TimelineFrame(thisFrame: frame, animation: animation, canvas: $canvas, currFrame: $currFrame, isScrolling: $isScrolling)
                                 .id(frame)
+                            
                         }
                         Spacer().frame(width: 200)
                         
@@ -51,6 +54,7 @@ struct TimelineView: View {
                     .frame(height: 150)
                     
                 }
+                .scrollStatusMonitor($isScrolling, monitorMode: .exclusion)
                 .frame(width: 550, height: 150)
 //                .scrollTargetBehavior(.viewAligned)
 //                .scrollPosition(id: $centerFrame, anchor: .center)
@@ -59,8 +63,14 @@ struct TimelineView: View {
 //                .scrollTargetBehavior(.viewAligned)
                 .scrollIndicators(.hidden)
                 .onChange(of: animation.selectedFrame) {
-                    withAnimation(.easeInOut(duration: 1.0)) {
-                        proxy.scrollTo(animation.selectedFrame, anchor: .center)
+                    currFrame = animation.selectedFrame!
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        proxy.scrollTo(currFrame, anchor: .center)
+                    }
+                }
+                .onChange(of: isScrolling) {
+                    if !isScrolling {
+                        animation.loadDrawing(canvas: canvas, frame: currFrame)
                     }
                 }
                 
@@ -141,6 +151,7 @@ struct TimelineView: View {
         guard isPlaying else { return }
                 
         frameImage = images[index]
+        currFrame = animation.frames[index]
         
         let nextIndex = (index + 1) % images.count
         
@@ -154,6 +165,7 @@ struct TimelineView: View {
         onionSkinModeIsOn = onionSkinModeWasOn!
         canvas.drawing = try! PKDrawing(data: animation.selectedFrame!.frameData)
         isPlaying = false
+        currFrame = animation.selectedFrame!
     }
     
 }
@@ -167,7 +179,7 @@ struct TimelineView_Previews: PreviewProvider {
         // Set up a sample animation for preview
         let previewAnimation = Animation.previewAnimation(in: realm)
         
-        return AnimationView(animation: previewAnimation)
+        return AnimationView(animation: previewAnimation, currFrame: previewAnimation.selectedFrame!)
             .environment(\.realm, realm)
             .environment(\.realmConfiguration, config)
     }
