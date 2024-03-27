@@ -18,12 +18,13 @@ struct ToolbarView: View {
     @Environment(\.undoManager) private var undoManager
     @Binding var canvas: PKCanvasView
     @State private var selectedTool: DrawingTool? = .pencil  // Default to pencil
+    @State private var eraserIsVector : Bool = false
   
     let toolPicker = PKToolPicker.self
     
     let pencil = PKInkingTool(.pencil, color: .black, width: 10)
     let knife = PKLassoTool()
-    let eraser = PKEraserTool(.bitmap)
+    @State var eraser = PKEraserTool(.bitmap)
 
     var body: some View {
         ZStack {
@@ -48,6 +49,31 @@ struct ToolbarView: View {
                         self.canvas.tool = self.eraser
                     } label: {
                         Image(self.selectedTool == .eraser ? "eraser" : "eraserGrey").offset(x: self.selectedTool == .eraser ? 30 : 0)
+                    }
+                    .contextMenu {
+                        Button {
+                            eraserIsVector = true
+                            self.eraser = PKEraserTool(.vector)
+                            self.selectedTool = .eraser
+                            self.canvas.tool = self.eraser
+                        } label: {
+                            Text("Object eraser")
+                            if eraserIsVector {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                        Button {
+                            eraserIsVector = false
+                            self.eraser = PKEraserTool(.bitmap)
+                            self.selectedTool = .eraser
+                            self.canvas.tool = self.eraser
+                        } label: {
+                            Text("Pixel eraser")
+                            if !eraserIsVector {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+
                     }
 
                     Button {
